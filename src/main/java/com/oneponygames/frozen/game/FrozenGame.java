@@ -2,6 +2,7 @@ package com.oneponygames.frozen.game;
 
 import com.badlogic.gdx.Game;
 import com.oneponygames.frozen.data.StateMachine;
+import com.oneponygames.frozen.eventsystem.events.lifecycle.ScreenInitEvent;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +15,7 @@ public abstract class FrozenGame extends Game {
     private final StateMachine<FrozenScreen> screenStateMachine = new StateMachine<FrozenScreen>();
 
     private void addScreen(FrozenScreen screen) {
+        screen.reportEvent(new ScreenInitEvent());
         this.screenStateMachine.addState(screen);
     }
 
@@ -31,6 +33,7 @@ public abstract class FrozenGame extends Game {
         this.addScreens(screens);
 
         this.screenStateMachine.pushStateByLabel(this.getInitialScreenLabel());
+
         this.updateScreen();
     }
 

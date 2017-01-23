@@ -1,4 +1,6 @@
-package com.oneponygames.frozen.logic.events;
+package com.oneponygames.frozen.eventsystem.events;
+
+import com.badlogic.ashley.core.EntitySystem;
 
 /**
  * Created by Icewind on 23.01.2017.

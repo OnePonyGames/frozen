@@ -1,7 +1,5 @@
 package com.oneponygames.frozen.data;
 
-import com.badlogic.gdx.Screen;
-
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -21,10 +19,7 @@ public class StateMachine<T extends State> {
     }
 
     public void pushState(T nextState) {
-        if(this.hasState())
-            this.peekCurrentState().afterStateInactive();
         this.stateStack.addFirst(nextState);
-        this.peekCurrentState().beforeStateActive();
     }
 
     public T peekCurrentState() {
@@ -33,8 +28,6 @@ public class StateMachine<T extends State> {
 
     public void popCurrentState() {
         T e = this.stateStack.removeFirst();
-        e.afterStateInactive();
-        this.peekCurrentState().beforeStateActive();
     }
 
     public void transition(T nextState) {

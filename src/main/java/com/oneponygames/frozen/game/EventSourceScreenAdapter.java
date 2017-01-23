@@ -1,8 +1,9 @@
 package com.oneponygames.frozen.game;
 
 import com.badlogic.gdx.Screen;
-import com.oneponygames.frozen.logic.events.BasicEventSource;
-import com.oneponygames.frozen.logic.events.lifecycle.ScreenRenderEvent;
+import com.oneponygames.frozen.eventsystem.events.BasicEventSource;
+import com.oneponygames.frozen.eventsystem.events.lifecycle.DisposeEvent;
+import com.oneponygames.frozen.eventsystem.events.lifecycle.ScreenRenderEvent;
 
 /**
  * Created by Icewind on 18.01.2017.
@@ -11,6 +12,7 @@ public class EventSourceScreenAdapter extends BasicEventSource implements Screen
 
     @Override
     public void show() {
+        System.out.println("show");
     }
 
     @Override
@@ -40,6 +42,6 @@ public class EventSourceScreenAdapter extends BasicEventSource implements Screen
 
     @Override
     public void dispose() {
-
+        this.getEventSystem().reportEvent(new DisposeEvent());
     }
 }

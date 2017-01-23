@@ -1,4 +1,4 @@
-package com.oneponygames.frozen.logic.events;
+package com.oneponygames.frozen.eventsystem.events;
 
 /**
  * Created by Icewind on 18.01.2017.

@@ -3,19 +3,19 @@ package com.oneponygames.frozen.game;
 import com.badlogic.gdx.Screen;
 import com.oneponygames.frozen.data.State;
 import com.oneponygames.frozen.data.StateMachine;
-import com.oneponygames.frozen.logic.events.BasicEventSystem;
-import com.oneponygames.frozen.logic.events.EventSystem;
-import com.oneponygames.frozen.logic.events.EventSource;
-import com.oneponygames.frozen.logic.events.GameEvent;
-import com.oneponygames.frozen.logic.subscriber.EventSubscriber;
+import com.oneponygames.frozen.eventsystem.events.BasicEventSystem;
+import com.oneponygames.frozen.eventsystem.events.EventSystem;
+import com.oneponygames.frozen.eventsystem.events.EventSource;
+import com.oneponygames.frozen.eventsystem.events.GameEvent;
+import com.oneponygames.frozen.eventsystem.subscriber.EventConsumer;
 
 /**
  * Created by Icewind on 18.01.2017.
  */
 public class FrozenScreen implements State<FrozenScreen>, EventSystem {
 
-    private final BasicEventSystem eventSystem;
     private final String label;
+    private final BasicEventSystem eventSystem;
     private final EventSourceScreenAdapter screen;
 
     private StateMachine<FrozenScreen> stateMachine;
@@ -40,15 +40,9 @@ public class FrozenScreen implements State<FrozenScreen>, EventSystem {
         this.stateMachine = stateMachine;
     }
 
-    public void afterStateInactive() {
-    }
-
-    public void beforeStateActive() {
-    }
-
     @Override
-    public final <T extends GameEvent> void addSubscriber(Class<T> eventClass, EventSubscriber<T> subscriber) {
-        this.eventSystem.addSubscriber(eventClass, subscriber);
+    public final <T extends GameEvent> void addConsumer(Class<T> eventClass, EventConsumer<T> subscriber) {
+        this.eventSystem.addConsumer(eventClass, subscriber);
     }
 
     @Override
