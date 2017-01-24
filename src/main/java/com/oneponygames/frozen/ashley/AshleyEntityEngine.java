@@ -12,11 +12,11 @@ import com.oneponygames.frozen.eventsystem.subscriber.EventSubscriber;
 /**
  * Created by Icewind on 23.01.2017.
  */
-public class EntityEngine implements EventSubscriber {
+public class AshleyEntityEngine implements EventSubscriber {
 
     private final Engine engine;
 
-    public EntityEngine() {
+    public AshleyEntityEngine() {
         this.engine = new Engine();
     }
 

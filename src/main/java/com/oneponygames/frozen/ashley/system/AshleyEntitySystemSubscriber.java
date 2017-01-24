@@ -7,15 +7,22 @@ import com.oneponygames.frozen.eventsystem.events.entity.AddEntitySystemEvent;
 import com.oneponygames.frozen.eventsystem.events.lifecycle.ScreenInitEvent;
 import com.oneponygames.frozen.eventsystem.subscriber.EventSubscriber;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by Icewind on 23.01.2017.
  */
-public abstract class BasicEntitySubscriber extends BasicEventSource implements EventSubscriber {
+public final class AshleyEntitySystemSubscriber extends BasicEventSource implements EventSubscriber {
+
+    private final List<EntitySystem> systems = new ArrayList<>();
 
     @Override
     public void subscribeTo(EventSystem system) {
-        system.addConsumer(ScreenInitEvent.class, e -> system.reportEvent(new AddEntitySystemEvent(this.getEntitySystem())));
+        system.addConsumer(ScreenInitEvent.class, e -> systems.forEach( s-> system.reportEvent(new AddEntitySystemEvent(s))));
     }
 
-    public abstract EntitySystem getEntitySystem();
+    public void addEntitySystem(EntitySystem entitySystem) {
+        this.systems.add(entitySystem);
+    }
 }

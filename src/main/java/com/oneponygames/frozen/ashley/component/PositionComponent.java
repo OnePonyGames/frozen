@@ -2,41 +2,32 @@ package com.oneponygames.frozen.ashley.component;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
+import com.oneponygames.frozen.data.Position;
 
 /**
  * Created by Icewind on 23.01.2017.
  */
 public class PositionComponent implements Component {
 
-    private final Vector2 position;
-    private float rotation;
+    private final Position position;
 
-    public PositionComponent(float x, float y) {
-        this(new Vector2(x, y));
-    }
-
-    public PositionComponent(Vector2 position) {
-        this(position, 0);
-    }
-
-    public PositionComponent(Vector2 position, float rotation) {
+    public PositionComponent(Position position) {
         this.position = position;
-        this.rotation = rotation;
     }
 
     public float getX() {
-        return this.position.x;
+        return this.position.getX();
     }
 
     public float getY() {
-        return this.position.y;
+        return this.position.getY();
     }
 
-    public Vector2 getPosition() {
-        return position.cpy();
+    public Vector2 getPositionVector() {
+        return position.getPositionVector();
     }
 
     public float getRotation() {
-        return rotation;
+        return this.position.getRotation();
     }
 }

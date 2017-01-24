@@ -1,4 +1,4 @@
-package com.oneponygames.frozen.eventsystem.subscriber;
+package com.oneponygames.frozen.ashley.system;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
@@ -6,6 +6,8 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.oneponygames.frozen.eventsystem.events.EventSystem;
 import com.oneponygames.frozen.eventsystem.events.lifecycle.ScreenRenderEvent;
+import com.oneponygames.frozen.eventsystem.subscriber.EventConsumer;
+import com.oneponygames.frozen.eventsystem.subscriber.EventSubscriber;
 
 /**
  * Created by Icewind on 18.01.2017.
@@ -26,9 +28,6 @@ public class SampleRenderer implements EventSubscriber, EventConsumer<ScreenRend
 
     @Override
     public void event(ScreenRenderEvent event) {
-        Gdx.gl.glClearColor(0, 0, 0.2f, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
         this.shapeRenderer.begin();
         this.shapeRenderer.setColor(Color.WHITE);
         this.shapeRenderer.rect(100, 100, 100, 100);
