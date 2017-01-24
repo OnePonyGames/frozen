@@ -1,8 +1,8 @@
 package com.oneponygames.frozen.utils;
 
 import com.badlogic.ashley.core.ComponentMapper;
-import com.oneponygames.frozen.ashley.component.DrawableComponent;
-import com.oneponygames.frozen.ashley.component.PositionComponent;
+import com.oneponygames.frozen.base.ashley.component.DrawableComponent;
+import com.oneponygames.frozen.base.ashley.component.PositionComponent;
 
 /**
  * Created by Icewind on 23.01.2017.
