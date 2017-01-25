@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.oneponygames.frozen.base.data.debug.DebugInfo;
 import com.oneponygames.frozen.base.eventsystem.EventConsumer;
 import com.oneponygames.frozen.base.eventsystem.EventSubscriber;
-import com.oneponygames.frozen.base.eventsystem.EventSystem;
+import com.oneponygames.frozen.base.eventsystem.EventService;
 import com.oneponygames.frozen.base.eventsystem.events.debug.AddDebugInfoEvent;
 import com.oneponygames.frozen.base.eventsystem.events.lifecycle.ScreenRenderEvent;
 
@@ -32,7 +32,7 @@ public class DebugRenderer implements EventSubscriber, EventConsumer<ScreenRende
     }
 
     @Override
-    public void subscribeTo(EventSystem system) {
+    public void subscribeTo(EventService system) {
         system.addConsumer(ScreenRenderEvent.class, this);
         system.addConsumer(AddDebugInfoEvent.class, e -> this.addDebugInfo(e.getInfo()));
     }

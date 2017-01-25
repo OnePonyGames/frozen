@@ -1,6 +1,7 @@
 package com.oneponygames.frozen.base.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.oneponygames.frozen.base.data.StateMachine;
 import com.oneponygames.frozen.base.eventsystem.events.lifecycle.ScreenInitEvent;
 
@@ -39,6 +40,8 @@ public abstract class FrozenGame extends Game {
 
     private void updateScreen() {
         this.setScreen(this.screenStateMachine.peekCurrentState().getScreen());
+
+        Gdx.input.setInputProcessor(this.screenStateMachine.peekCurrentState().getInput());
     }
 
     protected abstract String getInitialScreenLabel();

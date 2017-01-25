@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Created by Icewind on 18.01.2017.
  */
-public class BasicEventSystem implements EventSystem {
+public class BasicEventSystem implements EventService, EventSink {
 
     private final Multimap<Class<? extends GameEvent>, EventConsumer<? extends GameEvent>> subscribers = LinkedHashMultimap.create();
     private final Set<EventSource> sources = new LinkedHashSet<>();
@@ -34,6 +34,6 @@ public class BasicEventSystem implements EventSystem {
     @Override
     public void addSource(EventSource source) {
         this.sources.add(source);
-        source.setEventSystem(this);
+        source.setEventSink(this);
     }
 }

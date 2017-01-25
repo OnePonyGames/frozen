@@ -1,31 +1,34 @@
 package com.oneponygames.frozen.base.game;
 
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.oneponygames.frozen.base.data.State;
 import com.oneponygames.frozen.base.data.StateMachine;
-import com.oneponygames.frozen.base.eventsystem.BasicEventSystem;
-import com.oneponygames.frozen.base.eventsystem.EventSystem;
-import com.oneponygames.frozen.base.eventsystem.EventSource;
+import com.oneponygames.frozen.base.eventsystem.*;
 import com.oneponygames.frozen.base.eventsystem.events.GameEvent;
-import com.oneponygames.frozen.base.eventsystem.EventConsumer;
+import com.oneponygames.frozen.base.eventsystem.sources.EventSourceScreenAdapter;
+import com.oneponygames.frozen.base.eventsystem.sources.InputSourceAdapter;
 
 /**
  * Created by Icewind on 18.01.2017.
  */
-public class FrozenScreen implements State<FrozenScreen>, EventSystem {
+public class FrozenScreen implements State<FrozenScreen>, EventService, EventSink {
 
     private final String label;
     private final BasicEventSystem eventSystem;
     private final EventSourceScreenAdapter screen;
+    private final InputSourceAdapter input;
 
     private StateMachine<FrozenScreen> stateMachine;
 
     public FrozenScreen(String label) {
         this.label = label;
         this.screen = new EventSourceScreenAdapter();
+        this.input = new InputSourceAdapter();
         this.eventSystem = new BasicEventSystem();
 
         this.addSource(this.screen);
+        this.addSource(this.input);
     }
 
     public final Screen getScreen() {
@@ -38,6 +41,10 @@ public class FrozenScreen implements State<FrozenScreen>, EventSystem {
 
     public final void setStateMachine(StateMachine<FrozenScreen> stateMachine) {
         this.stateMachine = stateMachine;
+    }
+
+    public InputProcessor getInput() {
+        return input;
     }
 
     @Override

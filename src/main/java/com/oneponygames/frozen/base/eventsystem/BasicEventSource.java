@@ -5,14 +5,14 @@ package com.oneponygames.frozen.base.eventsystem;
  */
 public abstract class BasicEventSource implements EventSource {
 
-    private EventSystem eventSystem;
+    private EventSink sink;
 
     @Override
-    public void setEventSystem(EventSystem system) {
-        this.eventSystem = system;
+    public void setEventSink(EventSink sink) {
+        this.sink = sink;
     }
 
-    protected EventSystem getEventSystem() {
-        return eventSystem;
+    protected EventSink getEventSink() {
+        return sink;
     }
 }

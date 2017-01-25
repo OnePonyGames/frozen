@@ -1,4 +1,4 @@
-package com.oneponygames.frozen.base.game;
+package com.oneponygames.frozen.base.eventsystem.sources;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -13,16 +13,14 @@ import com.oneponygames.frozen.base.eventsystem.events.lifecycle.ScreenRenderEve
 public class EventSourceScreenAdapter extends BasicEventSource implements Screen {
 
     @Override
-    public void show() {
-        System.out.println("show");
-    }
+    public void show() {}
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        this.getEventSystem().reportEvent(new ScreenRenderEvent(delta));
+        this.getEventSink().reportEvent(new ScreenRenderEvent(delta));
     }
 
     @Override
@@ -47,6 +45,6 @@ public class EventSourceScreenAdapter extends BasicEventSource implements Screen
 
     @Override
     public void dispose() {
-        this.getEventSystem().reportEvent(new DisposeEvent());
+        this.getEventSink().reportEvent(new DisposeEvent());
     }
 }

@@ -2,8 +2,8 @@ package com.oneponygames.frozen.base.ashley.system;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.oneponygames.frozen.base.eventsystem.subscriber.OrthoCameraController;
 import com.oneponygames.frozen.base.gfx.Drawable;
 import com.oneponygames.frozen.base.ashley.component.DrawableComponent;
 import com.oneponygames.frozen.base.ashley.component.PositionComponent;
@@ -15,14 +15,14 @@ import com.oneponygames.frozen.utils.BaseMappers;
 public class EntityRenderer extends HookedIteratingSystem {
 
     private final SpriteBatch batch;
-    private final Camera camera;
+    private final OrthoCameraController camera;
     private final int pixelScaling;
 
-    public EntityRenderer(SpriteBatch batch, Camera camera) {
+    public EntityRenderer(SpriteBatch batch, OrthoCameraController camera) {
         this(batch, camera, 1);
     }
 
-    public EntityRenderer(SpriteBatch batch, Camera camera, int pixelScaling) {
+    public EntityRenderer(SpriteBatch batch, OrthoCameraController camera, int pixelScaling) {
         super(Family.all(DrawableComponent.class, PositionComponent.class).get());
         this.batch = batch;
         this.camera = camera;
@@ -44,7 +44,7 @@ public class EntityRenderer extends HookedIteratingSystem {
         PositionComponent pos = BaseMappers.positionMap.get(entity);
         DrawableComponent draw = BaseMappers.drawableMap.get(entity);
 
-        batch.setProjectionMatrix(camera.combined);
+        batch.setProjectionMatrix(camera.getCombined());
 
         for(Drawable d : draw.getDrawables()) {
             if(d.doDraw()) {

@@ -1,7 +1,7 @@
 package com.oneponygames.frozen.base.ashley;
 
 import com.badlogic.ashley.core.Engine;
-import com.oneponygames.frozen.base.eventsystem.EventSystem;
+import com.oneponygames.frozen.base.eventsystem.EventService;
 import com.oneponygames.frozen.base.eventsystem.events.entity.AddEntityEvent;
 import com.oneponygames.frozen.base.eventsystem.events.entity.AddEntitySystemEvent;
 import com.oneponygames.frozen.base.eventsystem.events.entity.RemoveEntityEvent;
@@ -21,12 +21,12 @@ public class AshleyEntityEngine implements EventSubscriber {
     }
 
     @Override
-    public void subscribeTo(EventSystem system) {
+    public void subscribeTo(EventService system) {
         system.addConsumer(AddEntityEvent.class, e -> this.engine.addEntity(e.getEntity()));
         system.addConsumer(RemoveEntityEvent.class, e-> this.engine.removeEntity(e.getEntity()));
         system.addConsumer(AddEntitySystemEvent.class, e-> this.engine.addSystem(e.getSystem()));
         system.addConsumer(RemoveEntitySystemEvent.class, e-> this.engine.removeSystem(e.getSystem()));
 
-        system.addConsumer(ScreenRenderEvent.class, e-> this.engine.update(e.delta));
+        system.addConsumer(ScreenRenderEvent.class, e-> this.engine.update(e.getDelta()));
     }
 }

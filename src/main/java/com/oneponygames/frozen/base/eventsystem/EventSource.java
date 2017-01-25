@@ -5,5 +5,5 @@ package com.oneponygames.frozen.base.eventsystem;
  */
 public interface EventSource {
 
-    public void setEventSystem(EventSystem system);
+    public void setEventSink(EventSink sink);
 }

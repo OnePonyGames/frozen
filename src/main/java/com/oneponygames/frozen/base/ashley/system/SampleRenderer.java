@@ -2,7 +2,7 @@ package com.oneponygames.frozen.base.ashley.system;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import com.oneponygames.frozen.base.eventsystem.EventSystem;
+import com.oneponygames.frozen.base.eventsystem.EventService;
 import com.oneponygames.frozen.base.eventsystem.events.lifecycle.ScreenRenderEvent;
 import com.oneponygames.frozen.base.eventsystem.EventConsumer;
 import com.oneponygames.frozen.base.eventsystem.EventSubscriber;
@@ -20,7 +20,7 @@ public class SampleRenderer implements EventSubscriber, EventConsumer<ScreenRend
     }
 
     @Override
-    public void subscribeTo(EventSystem system) {
+    public void subscribeTo(EventService system) {
         system.addConsumer(ScreenRenderEvent.class, this);
     }
 
