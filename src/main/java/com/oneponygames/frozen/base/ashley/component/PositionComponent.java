@@ -30,4 +30,8 @@ public class PositionComponent implements Component {
     public float getRotation() {
         return this.position.getRotation();
     }
+
+    public void move(Vector2 movement) {
+        this.position.move(movement);
+    }
 }

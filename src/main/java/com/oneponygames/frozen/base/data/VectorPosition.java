@@ -38,4 +38,9 @@ public class VectorPosition implements Position {
     public float getRotation() {
         return rotation;
     }
+
+    @Override
+    public void move(Vector2 movement) {
+        this.position.add(movement);
+    }
 }

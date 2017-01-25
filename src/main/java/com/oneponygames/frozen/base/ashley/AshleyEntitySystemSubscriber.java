@@ -1,4 +1,4 @@
-package com.oneponygames.frozen.base.ashley.system;
+package com.oneponygames.frozen.base.ashley;
 
 import com.badlogic.ashley.core.EntitySystem;
 import com.oneponygames.frozen.base.eventsystem.BasicEventSource;

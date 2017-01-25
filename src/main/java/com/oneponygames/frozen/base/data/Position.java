@@ -14,4 +14,6 @@ public interface Position {
     public Vector2 getPositionVector();
 
     public float getRotation();
+
+    public void move(Vector2 movement);
 }

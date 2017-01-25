@@ -16,13 +16,13 @@ public class EntityRenderer extends HookedIteratingSystem {
 
     private final SpriteBatch batch;
     private final OrthoCameraController camera;
-    private final int pixelScaling;
+    private final float pixelScaling;
 
     public EntityRenderer(SpriteBatch batch, OrthoCameraController camera) {
         this(batch, camera, 1);
     }
 
-    public EntityRenderer(SpriteBatch batch, OrthoCameraController camera, int pixelScaling) {
+    public EntityRenderer(SpriteBatch batch, OrthoCameraController camera, float pixelScaling) {
         super(Family.all(DrawableComponent.class, PositionComponent.class).get());
         this.batch = batch;
         this.camera = camera;
