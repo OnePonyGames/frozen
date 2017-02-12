@@ -1,4 +1,4 @@
-package com.oneponygames.frozen.base.ashley.component;
+package com.oneponygames.frozen.platformer.components;
 
 import com.badlogic.ashley.core.Component;
 

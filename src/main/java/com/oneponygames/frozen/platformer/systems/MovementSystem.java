@@ -1,11 +1,11 @@
-package com.oneponygames.frozen.base.ashley.system;
+package com.oneponygames.frozen.platformer.systems;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IntervalIteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.oneponygames.frozen.base.ashley.component.PositionComponent;
-import com.oneponygames.frozen.base.ashley.component.VelocityComponent;
+import com.oneponygames.frozen.platformer.components.VelocityComponent;
 import com.oneponygames.frozen.utils.BaseMappers;
 
 /**

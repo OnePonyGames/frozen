@@ -1,4 +1,4 @@
-package com.oneponygames.frozen.base.ashley.component;
+package com.oneponygames.frozen.platformer.components;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
@@ -8,10 +8,22 @@ import com.badlogic.gdx.math.Vector2;
  */
 public class VelocityComponent implements Component {
 
-    public float x;
-    public float y;
+    private float x;
+    private float y;
+
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
 
     public Vector2 getVelocityVector() {
         return new Vector2(x,y);
+    }
+
+    public void addY(float v) {
+        this.y += v;
     }
 }

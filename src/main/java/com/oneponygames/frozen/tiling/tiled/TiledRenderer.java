@@ -1,4 +1,4 @@
-package com.oneponygames.frozen.tiled;
+package com.oneponygames.frozen.tiling.tiled;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -9,7 +9,7 @@ import com.oneponygames.frozen.base.eventsystem.subscriber.OrthoCameraController
 import com.oneponygames.frozen.base.eventsystem.EventSubscriber;
 import com.oneponygames.frozen.base.eventsystem.EventService;
 import com.oneponygames.frozen.base.eventsystem.events.lifecycle.ScreenRenderEvent;
-import com.oneponygames.frozen.tiled.event.LoadTiledMapEvent;
+import com.oneponygames.frozen.tiling.tiled.event.TiledMapLoadedEvent;
 
 /**
  * Created by Icewind on 25.01.2017.
@@ -36,7 +36,7 @@ public class TiledRenderer implements EventSubscriber {
 
     @Override
     public void subscribeTo(EventService system) {
-        system.addConsumer(LoadTiledMapEvent.class, e->this.setMap(e.getMap()));
+        system.addConsumer(TiledMapLoadedEvent.class, e->this.setMap(e.getMap()));
 
         system.addConsumer(ScreenRenderEvent.class, e->this.render());
     }
