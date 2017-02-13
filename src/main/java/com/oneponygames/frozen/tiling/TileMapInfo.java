@@ -14,4 +14,8 @@ public interface TileMapInfo {
     public Iterable<Tile> getIntersectingTiles(Line line);
 
     public Tile getTile(int x, int y);
+
+    public float getTileWidth();
+
+    public float getTileHeight();
 }

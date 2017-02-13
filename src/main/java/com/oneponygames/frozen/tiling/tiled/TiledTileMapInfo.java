@@ -64,12 +64,22 @@ public class TiledTileMapInfo implements TileMapInfo, EventSubscriber {
     }
 
     private IntVector2 worldToGridPos(Vector2 from) {
-        return new IntVector2((int)from.x / this.dimensions.x, (int)from.y / this.dimensions.y);
+        return new IntVector2((int)(from.x / this.getTileWidth()), (int)(from.y / this.getTileHeight()));
     }
 
     private void setMap(TiledMap map) {
         this.map = map;
         this.layer = (TiledMapTileLayer)this.map.getLayers().get(0);
         this.dimensions = new IntVector2(map.getProperties().get(TILE_WIDTH, Integer.class), map.getProperties().get(TILE_HEIGHT, Integer.class));
+    }
+
+    @Override
+    public float getTileWidth() {
+        return this.dimensions.x;
+    }
+
+    @Override
+    public float getTileHeight() {
+        return this.dimensions.y;
     }
 }

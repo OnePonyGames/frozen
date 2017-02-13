@@ -5,7 +5,7 @@ package com.oneponygames.frozen.base.data;
  */
 public interface Hitbox {
 
-    public float getWidth();
+    public float getBoundingBoxWidth();
 
-    public float getHeight();
+    public float getBoundingBoxHeight();
 }

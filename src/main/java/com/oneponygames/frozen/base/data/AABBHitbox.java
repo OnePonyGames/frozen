@@ -1,7 +1,5 @@
 package com.oneponygames.frozen.base.data;
 
-import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.math.Vector2;
 
 /**
  * Created by Icewind on 12.02.2017.
@@ -17,12 +15,12 @@ public class AABBHitbox implements Hitbox {
     }
 
     @Override
-    public float getWidth() {
+    public float getBoundingBoxWidth() {
         return this.width;
     }
 
     @Override
-    public float getHeight() {
+    public float getBoundingBoxHeight() {
         return this.height;
     }
 }

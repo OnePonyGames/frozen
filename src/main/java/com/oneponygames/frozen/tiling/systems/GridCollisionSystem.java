@@ -15,24 +15,22 @@ import com.oneponygames.frozen.tiling.TileMapInfo;
 import com.oneponygames.frozen.utils.BaseMappers;
 import com.oneponygames.frozen.utils.VectorUtil;
 
-import java.util.Collection;
-import java.util.List;
-
 /**
  * Created by Icewind on 25.01.2017.
  */
-public class GridCollisionSystem extends IntervalIteratingSystem {
+public class GridCollisionSystem extends IteratingSystem {
 
     private final TileMapInfo tileInfo;
+    private float allowedDistance = 3;
 
-    public GridCollisionSystem(TileMapInfo tileInfo, float interval) {
-        super(Family.all(HitBoxComponent.class, PositionComponent.class, CollisionComponent.class).get(), interval);
+    public GridCollisionSystem(TileMapInfo tileInfo) {
+        super(Family.all(HitBoxComponent.class, PositionComponent.class, CollisionComponent.class).get());
 
         this.tileInfo = tileInfo;
     }
 
     @Override
-    protected void processEntity(Entity entity) {
+    protected void processEntity(Entity entity, float delta) {
         Vector2 pos = BaseMappers.positionMap.get(entity).getPositionVector();
         CollisionComponent col = BaseMappers.collisionMap.get(entity);
         Hitbox hb = BaseMappers.hitboxMap.get(entity).getHitbox();
@@ -60,7 +58,10 @@ public class GridCollisionSystem extends IntervalIteratingSystem {
 
             if(toCheck.isSolid()) {
                 float distance = VectorUtil.getDistance(line, toCheck.getWorldCenter());
-                System.out.println("asdf");
+                float threshold = Math.abs(this.tileInfo.getTileWidth() / 2f * xDir) + Math.abs(this.tileInfo.getTileHeight() / 2f * yDir) + this.allowedDistance;
+
+                if(distance < threshold)
+                    return true;
             }
         }
         return false;
@@ -83,10 +84,10 @@ public class GridCollisionSystem extends IntervalIteratingSystem {
     }
 
     private Line getLine(Vector2 pos, Hitbox hb, int x1Fct, int y1Fct, int x2Fct, int y2Fct) {
-        float x1 = pos.x + (hb.getWidth()/2f * x1Fct);
-        float y1 = pos.y + (hb.getHeight()/2f * y1Fct);
-        float x2 = pos.x + (hb.getWidth()/2f * x2Fct);
-        float y2 = pos.y + (hb.getHeight()/2f * y2Fct);
+        float x1 = pos.x + (hb.getBoundingBoxWidth()/2f * x1Fct);
+        float y1 = pos.y + (hb.getBoundingBoxHeight()/2f * y1Fct);
+        float x2 = pos.x + (hb.getBoundingBoxWidth()/2f * x2Fct);
+        float y2 = pos.y + (hb.getBoundingBoxHeight()/2f * y2Fct);
         return new Line(x1, y1, x2, y2);
     }
 }

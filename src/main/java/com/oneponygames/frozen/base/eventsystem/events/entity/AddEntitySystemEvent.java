@@ -7,7 +7,14 @@ import com.badlogic.ashley.core.EntitySystem;
  */
 public class AddEntitySystemEvent extends EntitySystemEvent {
 
-    public AddEntitySystemEvent(EntitySystem system) {
+    private Float interval;
+
+    public AddEntitySystemEvent(EntitySystem system, Float interval) {
         super(system);
+        this.interval = interval;
+    }
+
+    public Float getInterval() {
+        return interval;
     }
 }

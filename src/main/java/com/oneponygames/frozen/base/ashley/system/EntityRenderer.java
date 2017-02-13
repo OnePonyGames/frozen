@@ -37,14 +37,13 @@ public class EntityRenderer extends HookedIteratingSystem {
     @Override
     protected void beforeUpdate() {
         batch.begin();
+        batch.setProjectionMatrix(camera.getCombined());
     }
 
     @Override
     protected void processEntity(Entity entity, float delta) {
         PositionComponent pos = BaseMappers.positionMap.get(entity);
         DrawableComponent draw = BaseMappers.drawableMap.get(entity);
-
-        batch.setProjectionMatrix(camera.getCombined());
 
         for(Drawable d : draw.getDrawables()) {
             if(d.doDraw()) {

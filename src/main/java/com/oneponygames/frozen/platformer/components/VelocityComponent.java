@@ -26,4 +26,8 @@ public class VelocityComponent implements Component {
     public void addY(float v) {
         this.y += v;
     }
+
+    public void setY(float y) {
+        this.y = y;
+    }
 }

@@ -4,7 +4,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.oneponygames.frozen.base.data.IntVector2;
 import com.oneponygames.frozen.tiling.Tile;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 
 /**
  * Created by Icewind on 12.02.2017.
