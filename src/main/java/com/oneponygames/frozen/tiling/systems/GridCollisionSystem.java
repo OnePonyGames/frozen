@@ -2,13 +2,12 @@ package com.oneponygames.frozen.tiling.systems;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.systems.IntervalIteratingSystem;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.Vector2;
 import com.oneponygames.frozen.platformer.components.CollisionComponent;
 import com.oneponygames.frozen.base.ashley.component.HitBoxComponent;
 import com.oneponygames.frozen.base.ashley.component.PositionComponent;
-import com.oneponygames.frozen.base.data.Hitbox;
+import com.oneponygames.frozen.base.data.hitbox.Hitbox;
 import com.oneponygames.frozen.base.data.Line;
 import com.oneponygames.frozen.tiling.Tile;
 import com.oneponygames.frozen.tiling.TileMapInfo;

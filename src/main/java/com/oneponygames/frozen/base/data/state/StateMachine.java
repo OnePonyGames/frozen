@@ -1,9 +1,6 @@
-package com.oneponygames.frozen.base.data;
+package com.oneponygames.frozen.base.data.state;
 
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by Icewind on 18.01.2017.
@@ -12,6 +9,7 @@ public class StateMachine<T extends State> {
 
     private Deque<T> stateStack = new LinkedList<T>();
     private final Map<String, T> labelStateMap = new HashMap<String, T>();
+    private final List<StateChangeListener<T>> listeners = new ArrayList<>();
 
     public void addState(T state) {
         this.labelStateMap.put(state.getLabel(), state);
@@ -19,7 +17,10 @@ public class StateMachine<T extends State> {
     }
 
     public void pushState(T nextState) {
-        this.stateStack.addFirst(nextState);
+        if(!this.hasState() || !this.peekCurrentState().equals(nextState)) {
+            this.stateStack.addFirst(nextState);
+            this.notifyListenersNewState(nextState);
+        }
     }
 
     public T peekCurrentState() {
@@ -27,11 +28,22 @@ public class StateMachine<T extends State> {
     }
 
     public void popCurrentState() {
-        T e = this.stateStack.removeFirst();
+        this.popCurrentState(true);
+    }
+
+    private void popCurrentState(boolean notifyListeners) {
+        this.stateStack.removeFirst();
+        if(notifyListeners)
+            this.notifyListenersNewState(this.peekCurrentState());
+    }
+
+    private void notifyListenersNewState(T newState) {
+        for(StateChangeListener<T> lst : this.listeners)
+            lst.notifyOfNewState(newState);
     }
 
     public void transition(T nextState) {
-        this.popCurrentState();
+        this.popCurrentState(false);
         this.pushState(nextState);
     }
 
@@ -39,6 +51,10 @@ public class StateMachine<T extends State> {
         if(this.hasState())
             return this.peekCurrentState().getLabel();
         return null;
+    }
+
+    public void addStateChangeListener(StateChangeListener<T> lst) {
+        this.listeners.add(lst);
     }
 
     private boolean hasState() {

@@ -24,4 +24,15 @@ public abstract class BasicDrawable implements Drawable {
     public final float getYOffset() {
         return this.getPositionOffset().y;
     }
+
+    @Override
+    public boolean doDraw() {
+        return true;
+    }
+
+    @Override
+    public float getAlpha() {
+        return 1;
+    }
+
 }

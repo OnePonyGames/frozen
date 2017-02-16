@@ -1,10 +1,10 @@
-package com.oneponygames.frozen.base.data;
+package com.oneponygames.frozen.base.data.hitbox;
 
 
 /**
  * Created by Icewind on 12.02.2017.
  */
-public class AABBHitbox implements Hitbox {
+public abstract class AABBHitbox extends BasicHitbox {
 
     private final float height;
     private final float width;

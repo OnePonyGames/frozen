@@ -7,5 +7,9 @@ import com.oneponygames.frozen.base.eventsystem.events.GameEvent;
  */
 public interface EventService {
 
-    public <C extends GameEvent> void addConsumer(Class<C> eventClass, EventConsumer<C> subscriber);
+    public static final int DEFAULT_PRIORITY = 10;
+
+    public <C extends GameEvent> void addConsumer(Class<C> eventClass, EventConsumer<? super C> subscriber);
+
+    public <C extends GameEvent> void addConsumer(Class<C> eventClass, EventConsumer<? super C> subscriber, int priority);
 }

@@ -9,7 +9,11 @@ import com.oneponygames.frozen.base.data.Position;
  */
 public class PositionComponent implements Component {
 
+    public static final int ORIENTATION_LEFT = 1;
+    public static final int ORIENTATION_RIGHT = -1;
+
     private final Position position;
+    private int orientation = ORIENTATION_RIGHT;
 
     public PositionComponent(Position position) {
         this.position = position;
@@ -33,5 +37,13 @@ public class PositionComponent implements Component {
 
     public void move(Vector2 movement) {
         this.position.move(movement);
+    }
+
+    public int getOrientation() {
+        return this.orientation;
+    }
+
+    public void setOrientation(int orientation) {
+        this.orientation = orientation;
     }
 }

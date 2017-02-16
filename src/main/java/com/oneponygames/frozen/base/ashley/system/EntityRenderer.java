@@ -58,7 +58,7 @@ public class EntityRenderer extends HookedIteratingSystem {
                 float originY = -d.getYOffset() + height/2;
                 float rotation = pos.getRotation() + d.getRotationOffset();
 
-                batch.draw(d.getTexture(), dx * pixelScaling, dy * pixelScaling, originX * pixelScaling, originY * pixelScaling, width * pixelScaling, height * pixelScaling, 1, 1, rotation);
+                batch.draw(d.getTexture(), dx * pixelScaling, dy * pixelScaling, originX * pixelScaling, originY * pixelScaling, width * pixelScaling, height * pixelScaling, pos.getOrientation(), 1, rotation);
             }
         }
     }

@@ -2,7 +2,7 @@ package com.oneponygames.frozen.base.game;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.oneponygames.frozen.base.data.StateMachine;
+import com.oneponygames.frozen.base.data.state.StateMachine;
 import com.oneponygames.frozen.base.eventsystem.events.lifecycle.ScreenInitEvent;
 
 import java.util.ArrayList;

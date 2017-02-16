@@ -34,16 +34,6 @@ public class TextureDrawable extends BasicDrawable {
     }
 
     @Override
-    public boolean doDraw() {
-        return true;
-    }
-
-    @Override
-    public float getAlpha() {
-        return 1;
-    }
-
-    @Override
     public float getRotationOffset() {
         return this.rotationOffset;
     }

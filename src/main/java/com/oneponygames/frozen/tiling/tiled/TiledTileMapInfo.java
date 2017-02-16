@@ -28,7 +28,7 @@ public class TiledTileMapInfo implements TileMapInfo, EventSubscriber {
 
     private TiledMap map;
     private TiledMapTileLayer layer;
-    private IntVector2 dimensions;
+    private IntVector2 dimensions = new IntVector2(0,0);
 
     @Override
     public void subscribeTo(EventService system) {

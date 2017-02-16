@@ -2,6 +2,8 @@ package com.oneponygames.frozen.base.eventsystem.sources;
 
 import com.badlogic.gdx.InputProcessor;
 import com.oneponygames.frozen.base.eventsystem.BasicEventSource;
+import com.oneponygames.frozen.base.eventsystem.events.input.KeyDownEvent;
+import com.oneponygames.frozen.base.eventsystem.events.input.KeyUpEvent;
 import com.oneponygames.frozen.base.eventsystem.events.input.MouseMovedEvent;
 
 /**
@@ -11,11 +13,13 @@ public class InputSourceAdapter extends BasicEventSource implements InputProcess
 
     @Override
     public boolean keyDown(int keycode) {
+        this.getEventSink().reportEvent(new KeyDownEvent(keycode));
         return true;
     }
 
     @Override
     public boolean keyUp(int keycode) {
+        this.getEventSink().reportEvent(new KeyUpEvent(keycode));
         return true;
     }
 

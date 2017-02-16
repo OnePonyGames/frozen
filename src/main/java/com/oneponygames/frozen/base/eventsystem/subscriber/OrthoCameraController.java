@@ -31,6 +31,10 @@ public class OrthoCameraController implements EventSubscriber {
         return this.camera.viewportHeight;
     }
 
+    public void setPosition(float x, float y) {
+        this.move(x - this.camera.position.x, y - this.camera.position.y);
+    }
+
     public OrthographicCamera getCamera() {
         return camera;
     }
