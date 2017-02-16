@@ -11,6 +11,10 @@ public class PositionComponentHitbox extends AABBHitbox {
     private final PositionComponent pos;
     private final Vector2 offset;
 
+    public PositionComponentHitbox(float width, float height, PositionComponent pos) {
+        this(width, height, pos, new Vector2(0,0));
+    }
+
     public PositionComponentHitbox(float width, float height, PositionComponent pos, Vector2 offset) {
         super(width, height);
         this.pos = pos;

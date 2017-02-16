@@ -50,6 +50,6 @@ public class OrthoCameraController implements EventSubscriber {
 
     @Override
     public void subscribeTo(EventService system) {
-        system.addConsumer(ScreenRenderEvent.class, e->this.camera.update());
+        system.addConsumer(e->this.camera.update(), ScreenRenderEvent.class);
     }
 }

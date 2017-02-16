@@ -21,7 +21,7 @@ public class SampleRenderer implements EventSubscriber, EventConsumer<ScreenRend
 
     @Override
     public void subscribeTo(EventService system) {
-        system.addConsumer(ScreenRenderEvent.class, this);
+        system.addConsumer(this, ScreenRenderEvent.class);
     }
 
     @Override

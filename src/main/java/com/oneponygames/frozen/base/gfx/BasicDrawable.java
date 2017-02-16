@@ -5,14 +5,22 @@ package com.oneponygames.frozen.base.gfx;
  */
 public abstract class BasicDrawable implements Drawable {
 
+    private final float height;
+    private final float width;
+
+    public BasicDrawable(float width, float height) {
+        this.width = width;
+        this.height = height;
+    }
+
     @Override
     public final float getWidth() {
-        return this.getTexture().getRegionWidth();
+        return this.width;
     }
 
     @Override
     public final float getHeight() {
-        return this.getTexture().getRegionHeight();
+        return this.height;
     }
 
     @Override

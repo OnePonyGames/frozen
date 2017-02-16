@@ -11,7 +11,8 @@ public abstract class StaticOffsetDrawable extends BasicDrawable {
     private final float rotOffset;
     private final Vector2 posOffset;
 
-    public StaticOffsetDrawable(float rotOffset, Vector2 posOffset) {
+    public StaticOffsetDrawable(float rotOffset, Vector2 posOffset, float width, float height) {
+        super(width, height);
         this.rotOffset = rotOffset;
         this.posOffset = posOffset;
     }

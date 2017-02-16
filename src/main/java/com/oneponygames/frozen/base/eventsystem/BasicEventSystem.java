@@ -29,14 +29,24 @@ public class BasicEventSystem implements EventService, EventSink, Comparator<Eve
     }
 
     @Override
-    public <C extends GameEvent> void addConsumer(Class<C> eventClass, EventConsumer<? super C> subscriber) {
-        this.addConsumer(eventClass, subscriber, EventService.DEFAULT_PRIORITY);
+    public <C extends GameEvent> void addConsumer(EventConsumer<C> subscriber, Class<? extends C>... eventClass) {
+        this.addConsumer(subscriber, EventService.DEFAULT_PRIORITY, eventClass);
     }
 
     @Override
+    public <C extends GameEvent> void addConsumer(EventConsumer<C> subscriber, int priority, Class<? extends C>... eventClass) {
+        this.priorities.put(subscriber, priority);
+
+        for(Class<? extends C> c : eventClass)
+            this.consumers.put(c, subscriber);
+    }
+
+    public <C extends GameEvent> void addConsumer(Class<C> eventClass, EventConsumer<? super C> subscriber) {
+
+    }
+
     public <C extends GameEvent> void addConsumer(Class<C> eventClass, EventConsumer<? super C> consumer, int priority) {
-        this.priorities.put(consumer, priority);
-        this.consumers.put(eventClass, consumer);
+
     }
 
     @Override

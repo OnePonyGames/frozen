@@ -24,9 +24,9 @@ public class CameraInputSubscriber implements EventSubscriber {
 
     @Override
     public void subscribeTo(EventService system) {
-        system.addConsumer(MouseMovedEvent.class, e->this.checkForScrolling(e.getX(), e.getY()));
+        system.addConsumer(e->this.checkForScrolling(e.getX(), e.getY()), MouseMovedEvent.class);
 
-        system.addConsumer(ScreenRenderEvent.class, e->this.camera.move(this.scrollX * e.getDelta(), this.scrollY * e.getDelta()));
+        system.addConsumer(e->this.camera.move(this.scrollX * e.getDelta(), this.scrollY * e.getDelta()), ScreenRenderEvent.class);
     }
 
     private void checkForScrolling(float x, float y) {

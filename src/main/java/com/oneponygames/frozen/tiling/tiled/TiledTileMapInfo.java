@@ -32,7 +32,7 @@ public class TiledTileMapInfo implements TileMapInfo, EventSubscriber {
 
     @Override
     public void subscribeTo(EventService system) {
-        system.addConsumer(TiledMapLoadedEvent.class, e -> this.setMap(e.getMap()));
+        system.addConsumer(e -> this.setMap(e.getMap()), TiledMapLoadedEvent.class);
     }
 
     @Override

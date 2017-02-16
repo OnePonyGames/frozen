@@ -12,7 +12,7 @@ import java.util.Map;
 /**
  * Created by Icewind on 16.02.2017.
  */
-public class CharacterStateDrawable extends BasicDrawable implements StateChangeListener<CharacterState> {
+public class CharacterStateDrawable implements Drawable, StateChangeListener<CharacterState> {
 
     private final CharacterStateComponent state;
     private final Map<CharacterState, Drawable> stateDrawableMap = new HashMap<>();
@@ -25,6 +25,34 @@ public class CharacterStateDrawable extends BasicDrawable implements StateChange
 
     public void putDrawable(CharacterState state, Drawable drawable) {
         this.stateDrawableMap.put(state, drawable);
+    }
+
+    @Override
+    public float getWidth() {
+        if(this.currentDrawable!=null)
+            return this.currentDrawable.getWidth();
+        return 0;
+    }
+
+    @Override
+    public float getHeight() {
+        if(this.currentDrawable!=null)
+            return this.currentDrawable.getHeight();
+        return 0;
+    }
+
+    @Override
+    public float getXOffset() {
+        if(this.currentDrawable!=null)
+            return this.currentDrawable.getXOffset();
+        return 0;
+    }
+
+    @Override
+    public float getYOffset() {
+        if(this.currentDrawable!=null)
+            return this.currentDrawable.getYOffset();
+        return 0;
     }
 
     @Override

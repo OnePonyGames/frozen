@@ -19,7 +19,7 @@ public final class AshleyEntitySystemSubscriber extends BasicEventSource impleme
 
     @Override
     public void subscribeTo(EventService service) {
-        service.addConsumer(ScreenInitEvent.class, e -> systems.forEach( (s, i)-> this.getEventSink().reportEvent(new AddEntitySystemEvent(s, i))));
+        service.addConsumer(e -> systems.forEach( (s, i)-> this.getEventSink().reportEvent(new AddEntitySystemEvent(s, i))), ScreenInitEvent.class);
     }
 
     /**

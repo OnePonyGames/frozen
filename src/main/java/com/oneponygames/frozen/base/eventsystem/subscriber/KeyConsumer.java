@@ -1,7 +1,6 @@
 package com.oneponygames.frozen.base.eventsystem.subscriber;
 
 import com.oneponygames.frozen.base.eventsystem.EventConsumer;
-import com.oneponygames.frozen.base.eventsystem.events.GameEvent;
 import com.oneponygames.frozen.base.eventsystem.events.input.KeyEvent;
 
 
@@ -18,7 +17,7 @@ public class KeyConsumer implements EventConsumer<KeyEvent> {
         this.function = function;
     }
 
-    public static final KeyConsumer key(int keycode, EventConsumer<KeyEvent> function) {
+    public static KeyConsumer key(int keycode, EventConsumer<KeyEvent> function) {
         return new KeyConsumer(keycode, function);
     }
 

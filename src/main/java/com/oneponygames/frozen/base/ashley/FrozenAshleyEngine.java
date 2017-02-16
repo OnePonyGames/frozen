@@ -68,11 +68,11 @@ public class FrozenAshleyEngine extends PooledEngine implements EventSubscriber 
 
     @Override
     public void subscribeTo(EventService system) {
-        system.addConsumer(AddEntityEvent.class, e -> this.addEntity(e.getEntity()));
-        system.addConsumer(RemoveEntityEvent.class, e-> this.removeEntity(e.getEntity()));
-        system.addConsumer(AddEntitySystemEvent.class, e-> this.addSystem(e.getSystem(), e.getInterval()));
-        system.addConsumer(RemoveEntitySystemEvent.class, e-> this.removeSystem(e.getSystem()));
+        system.addConsumer(e -> this.addEntity(e.getEntity()), AddEntityEvent.class);
+        system.addConsumer(e-> this.removeEntity(e.getEntity()), RemoveEntityEvent.class);
+        system.addConsumer(e-> this.addSystem(e.getSystem(), e.getInterval()), AddEntitySystemEvent.class);
+        system.addConsumer(e-> this.removeSystem(e.getSystem()), RemoveEntitySystemEvent.class);
 
-        system.addConsumer(ScreenRenderEvent.class, e-> this.update(e.getDelta()));
+        system.addConsumer(e-> this.update(e.getDelta()), ScreenRenderEvent.class);
     }
 }

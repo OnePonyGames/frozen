@@ -7,7 +7,7 @@ import java.util.*;
  */
 public class StateMachine<T extends State> {
 
-    private Deque<T> stateStack = new LinkedList<T>();
+    private LinkedList<T> stateStack = new LinkedList<T>();
     private final Map<String, T> labelStateMap = new HashMap<String, T>();
     private final List<StateChangeListener<T>> listeners = new ArrayList<>();
 
@@ -53,6 +53,13 @@ public class StateMachine<T extends State> {
         return null;
     }
 
+    public void removeFromStack(T state) {
+        if(state.equals(this.peekCurrentState()))
+            this.popCurrentState();
+        else
+            this.stateStack.remove(state);
+    }
+
     public void addStateChangeListener(StateChangeListener<T> lst) {
         this.listeners.add(lst);
     }
@@ -70,5 +77,9 @@ public class StateMachine<T extends State> {
             return this.labelStateMap.get(label);
 
         throw new IllegalArgumentException("No state of label '"+label+"' found, available are: "+this.labelStateMap.keySet());
+    }
+
+    public void insertState(T state, int positionFromTop) {
+        this.stateStack.add(positionFromTop, state);
     }
 }

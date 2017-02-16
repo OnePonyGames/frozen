@@ -18,6 +18,7 @@ public class TextureDrawable extends BasicDrawable {
     }
 
     public TextureDrawable(TextureRegion region, Vector2 positionOffset, float rotationOffset) {
+        super(region.getRegionWidth(), region.getRegionHeight());
         this.region = region;
         this.positionOffset = positionOffset;
         this.rotationOffset = rotationOffset;

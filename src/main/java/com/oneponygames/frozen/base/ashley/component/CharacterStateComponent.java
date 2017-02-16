@@ -28,6 +28,14 @@ public class CharacterStateComponent implements Component {
         return this.stateMachine.peekCurrentState();
     }
 
+    public void insertState(CharacterState state, int positionFromTop) {
+        this.stateMachine.insertState(state, positionFromTop);
+    }
+
+    public void removeFromStack(CharacterState state) {
+        this.stateMachine.removeFromStack(state);
+    }
+
     public void addStateChangeListener(StateChangeListener listener) {
         this.stateMachine.addStateChangeListener(listener);
     }

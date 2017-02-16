@@ -36,9 +36,9 @@ public class TiledRenderer implements EventSubscriber {
 
     @Override
     public void subscribeTo(EventService system) {
-        system.addConsumer(TiledMapLoadedEvent.class, e->this.setMap(e.getMap()));
+        system.addConsumer(e->this.setMap(e.getMap()), TiledMapLoadedEvent.class);
 
-        system.addConsumer(ScreenRenderEvent.class, e->this.render(), 0);
+        system.addConsumer(e->this.render(), 0, ScreenRenderEvent.class);
     }
 
     private void render() {

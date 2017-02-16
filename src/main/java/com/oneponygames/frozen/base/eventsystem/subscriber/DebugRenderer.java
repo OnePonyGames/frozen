@@ -33,8 +33,8 @@ public class DebugRenderer implements EventSubscriber, EventConsumer<ScreenRende
 
     @Override
     public void subscribeTo(EventService system) {
-        system.addConsumer(ScreenRenderEvent.class, this);
-        system.addConsumer(AddDebugInfoEvent.class, e -> this.addDebugInfo(e.getInfo()));
+        system.addConsumer(this, ScreenRenderEvent.class);
+        system.addConsumer(e -> this.addDebugInfo(e.getInfo()), AddDebugInfoEvent.class);
     }
 
     @Override

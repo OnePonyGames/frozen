@@ -53,6 +53,16 @@ public class FrozenScreen implements State<FrozenScreen>, EventService, EventSin
     }
 
     @Override
+    public <C extends GameEvent> void addConsumer(EventConsumer<C> subscriber, Class<? extends C>[] eventClass) {
+        this.eventSystem.addConsumer(subscriber, eventClass);
+    }
+
+    @Override
+    public <C extends GameEvent> void addConsumer(EventConsumer<C> subscriber, int priority, Class<? extends C>[] eventClass) {
+        this.eventSystem.addConsumer(subscriber, priority, eventClass);
+    }
+
+    /*@Override
     public final <T extends GameEvent> void addConsumer(Class<T> eventClass, EventConsumer<? super T> subscriber) {
         this.eventSystem.addConsumer(eventClass, subscriber);
     }
@@ -60,7 +70,7 @@ public class FrozenScreen implements State<FrozenScreen>, EventService, EventSin
     @Override
     public final <T extends GameEvent> void addConsumer(Class<T> eventClass, EventConsumer<? super T> subscriber, int priority) {
         this.eventSystem.addConsumer(eventClass, subscriber, priority);
-    }
+    }*/
 
     @Override
     public final void addSource(EventSource source) {

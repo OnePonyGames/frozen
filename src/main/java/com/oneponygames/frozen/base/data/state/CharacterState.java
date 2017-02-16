@@ -6,13 +6,15 @@ package com.oneponygames.frozen.base.data.state;
  */
 public enum CharacterState implements State  {
 
-    WALK("walk"), IDLE("idle"), LIGHT_ATTACK("light_attack");
+    WALK_LEFT("walk_left", false), WALK_RIGHT("walk_right", false), IDLE("idle", false), LIGHT_ATTACK("light_attack", true);
 
     private StateMachine stateMachine;
     private String label;
+    private boolean attackState;
 
-    CharacterState(String label) {
+    CharacterState(String label, boolean attackState) {
         this.label = label;
+        this.attackState = attackState;
     }
 
     @Override
@@ -23,5 +25,9 @@ public enum CharacterState implements State  {
     @Override
     public void setStateMachine(StateMachine stateMachine) {
         this.stateMachine = stateMachine;
+    }
+
+    public boolean isAttackState() {
+        return this.attackState;
     }
 }
