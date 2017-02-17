@@ -6,7 +6,7 @@ import com.oneponygames.frozen.base.ashley.component.PositionComponent;
 /**
  * Created by Icewind on 16.02.2017.
  */
-public class StopMoveRightEvent extends StopMoveEvent {
+public class StopMoveRightEvent extends MoveEntityEvent {
 
     public StopMoveRightEvent(Entity entity) {
         super(entity, PositionComponent.ORIENTATION_RIGHT);

@@ -20,7 +20,7 @@ public class CharacterStateDrawable implements Drawable, StateChangeListener<Cha
 
     public CharacterStateDrawable(CharacterStateComponent state) {
         this.state = state;
-        this.state.addStateChangeListener(this);
+        this.state.getStateMachine().addStateChangeListener(this);
     }
 
     public void putDrawable(CharacterState state, Drawable drawable) {

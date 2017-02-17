@@ -74,15 +74,30 @@ public class StateMachine<T extends State> {
         this.pushState(this.getStateByLabel(label));
     }
 
-    private T getStateByLabel(String label) {
+    public void transitionByLabel(String label) {
+        T state = this.getStateByLabel(label);
+        this.transition(state);
+    }
+
+    public T getStateByLabel(String label) {
         if(this.labelStateMap.containsKey(label))
             return this.labelStateMap.get(label);
 
         throw new IllegalArgumentException("No state of label '"+label+"' found, available are: "+this.labelStateMap.keySet());
     }
 
+    public void removeFromStackByLabel(String label) {
+        T state = this.getStateByLabel(label);
+        this.removeFromStack(state);
+    }
+
     public void insertState(T state, int positionFromTop) {
         this.stateStack.add(positionFromTop, state);
+    }
+
+    public void insertStateByLabel(String label, int posFromTop) {
+        T state = this.getStateByLabel(label);
+        this.insertState(state, posFromTop);
     }
 
     public Collection<T> getStateStack() {

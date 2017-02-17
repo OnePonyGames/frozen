@@ -37,7 +37,7 @@ public class AttackHitSystem extends HookedIteratingSystem implements EventSourc
     }
 
     @Override
-    protected void beforeUpdate() {
+    protected void beforeUpdate(float delta) {
         this.hitEvents.clear();
     }
 

@@ -37,7 +37,7 @@ public class EntityRenderer extends HookedIteratingSystem {
     }
 
     @Override
-    protected void beforeUpdate() {
+    protected void beforeUpdate(float delta) {
         batch.begin();
         batch.setProjectionMatrix(camera.getCombined());
     }

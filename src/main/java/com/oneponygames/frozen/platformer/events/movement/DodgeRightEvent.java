@@ -4,11 +4,11 @@ import com.badlogic.ashley.core.Entity;
 import com.oneponygames.frozen.base.ashley.component.PositionComponent;
 
 /**
- * Created by Icewind on 16.02.2017.
+ * Created by Icewind on 17.02.2017.
  */
-public class StartMoveRightEvent extends MoveEntityEvent {
+public class DodgeRightEvent extends MoveEntityEvent {
 
-    public StartMoveRightEvent(Entity entity) {
+    public DodgeRightEvent(Entity entity) {
         super(entity, PositionComponent.ORIENTATION_RIGHT);
     }
 }

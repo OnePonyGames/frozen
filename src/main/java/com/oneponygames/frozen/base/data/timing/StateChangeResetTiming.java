@@ -10,7 +10,7 @@ import com.oneponygames.frozen.base.data.state.StateChangeListener;
 public class StateChangeResetTiming extends BasicTiming implements StateChangeListener {
 
     public StateChangeResetTiming(CharacterStateComponent stateComponent) {
-        stateComponent.addStateChangeListener(this);
+        stateComponent.getStateMachine().addStateChangeListener(this);
     }
 
     @Override

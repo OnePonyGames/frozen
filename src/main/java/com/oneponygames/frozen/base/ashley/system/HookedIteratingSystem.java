@@ -18,12 +18,12 @@ public abstract class HookedIteratingSystem extends IteratingSystem {
 
     @Override
     public void update(float deltaTime) {
-        this.beforeUpdate();
+        this.beforeUpdate(deltaTime);
         super.update(deltaTime);
         this.afterUpdate();
     }
 
     protected abstract void afterUpdate();
 
-    protected abstract void beforeUpdate();
+    protected abstract void beforeUpdate(float deltaTime);
 }

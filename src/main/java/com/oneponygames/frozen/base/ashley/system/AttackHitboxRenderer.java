@@ -36,7 +36,7 @@ public class AttackHitboxRenderer extends HookedIteratingSystem {
     }
 
     @Override
-    protected void beforeUpdate() {
+    protected void beforeUpdate(float delta) {
         this.shape.setAutoShapeType(true);
         this.shape.begin();
         this.shape.setProjectionMatrix(camera.getCombined());

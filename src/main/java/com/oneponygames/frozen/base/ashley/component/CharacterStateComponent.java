@@ -21,39 +21,7 @@ public class CharacterStateComponent implements Component {
         return activeStateTiming;
     }
 
-    public void addState(CharacterState state) {
-        this.stateMachine.addState(state);
-    }
-
-    public void pushState(CharacterState state) {
-        this.stateMachine.pushState(state);
-    }
-
-    public void popCurrentState() {
-        this.stateMachine.popCurrentState();
-    }
-
-    public void transition(CharacterState state) {
-        this.stateMachine.transition(state);
-    }
-
-    public CharacterState peekCurrentState() {
-        return this.stateMachine.peekCurrentState();
-    }
-
-    public void insertState(CharacterState state, int positionFromTop) {
-        this.stateMachine.insertState(state, positionFromTop);
-    }
-
-    public void removeFromStack(CharacterState state) {
-        this.stateMachine.removeFromStack(state);
-    }
-
-    public void addStateChangeListener(StateChangeListener listener) {
-        this.stateMachine.addStateChangeListener(listener);
-    }
-
-    public Collection<CharacterState> getStateStack() {
-        return this.stateMachine.getStateStack();
+    public StateMachine<CharacterState> getStateMachine() {
+        return stateMachine;
     }
 }

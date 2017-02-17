@@ -21,7 +21,7 @@ public class AttackComponent implements Component {
     }
 
     public Attack getActiveAttack() {
-        return stateAttackMap.get(state.peekCurrentState());
+        return stateAttackMap.get(state.getStateMachine().peekCurrentState());
     }
 
     public void setState(CharacterStateComponent state) {
