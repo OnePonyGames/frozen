@@ -12,6 +12,8 @@ import com.oneponygames.frozen.base.eventsystem.events.lifecycle.ScreenRenderEve
  */
 public class EventSourceScreenAdapter extends BasicEventSource implements Screen {
 
+    private float total;
+
     @Override
     public void show() {}
 
@@ -20,7 +22,9 @@ public class EventSourceScreenAdapter extends BasicEventSource implements Screen
         Gdx.gl.glClearColor(0, 0, 0.2f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        this.getEventSink().reportEvent(new ScreenRenderEvent(delta));
+        this.total += delta;
+
+        this.getEventSink().reportEvent(new ScreenRenderEvent(delta, this.total));
     }
 
     @Override

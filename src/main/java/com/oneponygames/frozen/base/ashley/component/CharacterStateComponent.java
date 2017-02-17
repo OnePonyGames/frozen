@@ -33,6 +33,10 @@ public class CharacterStateComponent implements Component {
         this.stateMachine.popCurrentState();
     }
 
+    public void transition(CharacterState state) {
+        this.stateMachine.transition(state);
+    }
+
     public CharacterState peekCurrentState() {
         return this.stateMachine.peekCurrentState();
     }
