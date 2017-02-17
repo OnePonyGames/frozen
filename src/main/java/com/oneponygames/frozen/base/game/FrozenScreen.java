@@ -2,6 +2,7 @@ package com.oneponygames.frozen.base.game;
 
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
+import com.oneponygames.frozen.base.ashley.EntityPool;
 import com.oneponygames.frozen.base.ashley.FrozenAshleyEngine;
 import com.oneponygames.frozen.base.data.state.State;
 import com.oneponygames.frozen.base.data.state.StateMachine;
@@ -62,15 +63,9 @@ public class FrozenScreen implements State<FrozenScreen>, EventService, EventSin
         this.eventSystem.addConsumer(subscriber, priority, eventClass);
     }
 
-    /*@Override
-    public final <T extends GameEvent> void addConsumer(Class<T> eventClass, EventConsumer<? super T> subscriber) {
-        this.eventSystem.addConsumer(eventClass, subscriber);
+    public EntityPool getEntityPool() {
+        return this.engine;
     }
-
-    @Override
-    public final <T extends GameEvent> void addConsumer(Class<T> eventClass, EventConsumer<? super T> subscriber, int priority) {
-        this.eventSystem.addConsumer(eventClass, subscriber, priority);
-    }*/
 
     @Override
     public final void addSource(EventSource source) {

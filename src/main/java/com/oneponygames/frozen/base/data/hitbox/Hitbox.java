@@ -1,5 +1,6 @@
 package com.oneponygames.frozen.base.data.hitbox;
 
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 
 /**
@@ -16,4 +17,6 @@ public interface Hitbox {
     public float getCenterX();
 
     public float getCenterY();
+
+    public Polygon getHitboxArea();
 }

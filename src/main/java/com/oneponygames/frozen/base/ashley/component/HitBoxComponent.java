@@ -10,10 +10,6 @@ public class HitBoxComponent implements Component {
 
     private Hitbox hitbox;
 
-    public HitBoxComponent(Hitbox hitbox) {
-        this.hitbox = hitbox;
-    }
-
     public Hitbox getHitbox() {
         return hitbox;
     }

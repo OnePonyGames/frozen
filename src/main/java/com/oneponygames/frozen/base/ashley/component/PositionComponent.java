@@ -12,10 +12,10 @@ public class PositionComponent implements Component {
     public static final int ORIENTATION_LEFT = 1;
     public static final int ORIENTATION_RIGHT = -1;
 
-    private final Position position;
+    private Position position;
     private int orientation = ORIENTATION_RIGHT;
 
-    public PositionComponent(Position position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 

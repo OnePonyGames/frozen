@@ -68,7 +68,7 @@ public class BasicEventSystem implements EventService, EventSink, Comparator<Eve
 
     private int getPriority(EventConsumer<?> o1) {
         if(!this.priorities.containsKey(o1))
-            System.out.println(o1);
+            return DEFAULT_PRIORITY;
         return this.priorities.get(o1);
     }
 }

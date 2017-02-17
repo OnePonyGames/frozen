@@ -5,23 +5,24 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Matrix4;
-import com.oneponygames.frozen.base.ashley.component.HitBoxComponent;
 import com.oneponygames.frozen.base.ashley.component.PositionComponent;
 import com.oneponygames.frozen.base.data.hitbox.Hitbox;
 import com.oneponygames.frozen.base.eventsystem.subscriber.OrthoCameraController;
+import com.oneponygames.frozen.platformer.components.AttackComponent;
+import com.oneponygames.frozen.platformer.data.Attack;
 import com.oneponygames.frozen.utils.BaseMappers;
 
 /**
- * Created by Icewind on 13.02.2017.
+ * Created by Icewind on 17.02.2017.
  */
-public class HitboxRenderer extends HookedIteratingSystem {
+public class AttackHitboxRenderer extends HookedIteratingSystem {
 
     private final ShapeRenderer shape;
     private final OrthoCameraController camera;
     private final Matrix4 scaleMatrix;
 
-    public HitboxRenderer(ShapeRenderer shape, OrthoCameraController camera, float scaling) {
-        super(Family.all(HitBoxComponent.class).get());
+    public AttackHitboxRenderer(ShapeRenderer shape, OrthoCameraController camera, float scaling) {
+        super(Family.all(AttackComponent.class, PositionComponent.class).get());
 
         this.camera = camera;
         this.shape = shape;
@@ -40,13 +41,21 @@ public class HitboxRenderer extends HookedIteratingSystem {
         this.shape.begin();
         this.shape.setProjectionMatrix(camera.getCombined());
         this.shape.setTransformMatrix(this.scaleMatrix);
-        this.shape.setColor(Color.RED);
+        this.shape.setColor(Color.CHARTREUSE);
     }
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        Hitbox hb = BaseMappers.hitboxMap.get(entity).getHitbox();
+        AttackComponent att = BaseMappers.attackMap.get(entity);
 
-        this.shape.polygon(hb.getHitboxArea().getTransformedVertices());
+        if(att.hasActiveAttack()) {
+            Attack a = att.getActiveAttack();
+
+            if(a.isLive()) {
+                Hitbox hb = a.getHitbox();
+
+                this.shape.polygon(hb.getHitboxArea().getTransformedVertices());
+            }
+        }
     }
 }

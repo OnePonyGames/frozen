@@ -1,5 +1,7 @@
 package com.oneponygames.frozen.base.data.state;
 
+import com.google.common.collect.ImmutableList;
+
 import java.util.*;
 
 /**
@@ -81,5 +83,9 @@ public class StateMachine<T extends State> {
 
     public void insertState(T state, int positionFromTop) {
         this.stateStack.add(positionFromTop, state);
+    }
+
+    public Collection<T> getStateStack() {
+        return ImmutableList.copyOf(this.stateStack);
     }
 }

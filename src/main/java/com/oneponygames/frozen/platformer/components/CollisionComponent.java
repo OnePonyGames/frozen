@@ -11,5 +11,4 @@ public class CollisionComponent implements Component {
     public boolean contactRight;
     public boolean contactBottom;
     public boolean contactTop;
-
 }

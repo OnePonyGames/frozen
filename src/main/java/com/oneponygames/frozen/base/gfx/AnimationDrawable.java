@@ -41,13 +41,18 @@ public class AnimationDrawable extends StaticOffsetDrawable {
 
     @Override
     public TextureRegion getTexture() {
-        if(this.animation.isAnimationFinished(this.time.getTime()))
+        TextureRegion texture = this.animation.getKeyFrame(this.time.getTime(), this.looping);
+        if(!this.looping && this.animation.isAnimationFinished(this.time.getTime()))
             this.notifyListenersFinished();
-        return this.animation.getKeyFrame(this.time.getTime(), this.looping);
+        return texture;
     }
 
     private void notifyListenersFinished() {
         for(AnimationListener listener : this.listeners)
             listener.animationFinished(this);
+    }
+
+    public int getKeyFrameIndex() {
+        return this.animation.getKeyFrameIndex(this.time.getTime());
     }
 }

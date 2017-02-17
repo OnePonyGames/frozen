@@ -2,7 +2,9 @@ package com.oneponygames.frozen.base.ashley.system;
 
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.oneponygames.frozen.base.eventsystem.subscriber.OrthoCameraController;
 import com.oneponygames.frozen.base.gfx.Drawable;
 import com.oneponygames.frozen.base.ashley.component.DrawableComponent;
@@ -57,8 +59,9 @@ public class EntityRenderer extends HookedIteratingSystem {
                 float originX = -d.getXOffset() + width/2;
                 float originY = -d.getYOffset() + height/2;
                 float rotation = pos.getRotation() + d.getRotationOffset();
+                TextureRegion tr = d.getTexture();
 
-                batch.draw(d.getTexture(), dx * pixelScaling, dy * pixelScaling, originX * pixelScaling, originY * pixelScaling, width * pixelScaling, height * pixelScaling, pos.getOrientation(), 1, rotation);
+                batch.draw(tr, dx * pixelScaling, dy * pixelScaling, originX * pixelScaling, originY * pixelScaling, width * pixelScaling, height * pixelScaling, pos.getOrientation(), 1, rotation);
             }
         }
     }

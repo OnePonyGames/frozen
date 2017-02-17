@@ -1,10 +1,15 @@
 package com.oneponygames.frozen.base.ashley;
 
+import com.badlogic.ashley.core.Component;
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.ashley.core.PooledEngine;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.oneponygames.frozen.base.eventsystem.EventService;
 import com.oneponygames.frozen.base.eventsystem.EventSubscriber;
+import com.oneponygames.frozen.base.eventsystem.events.debug.DecreaseTimeFactorEvent;
+import com.oneponygames.frozen.base.eventsystem.events.debug.IncreaseTimeFactorEvent;
+import com.oneponygames.frozen.base.eventsystem.events.debug.ToggleSlowGameEvent;
 import com.oneponygames.frozen.base.eventsystem.events.entity.AddEntityEvent;
 import com.oneponygames.frozen.base.eventsystem.events.entity.AddEntitySystemEvent;
 import com.oneponygames.frozen.base.eventsystem.events.entity.RemoveEntityEvent;
@@ -18,10 +23,12 @@ import java.util.Map;
 /**
  * Created by Icewind on 13.02.2017.
  */
-public class FrozenAshleyEngine extends PooledEngine implements EventSubscriber  {
+public class FrozenAshleyEngine extends PooledEngine implements EventSubscriber, EntityPool  {
 
     private Accumulator<EntitySystem> accumulator = new Accumulator<>();
     private Map<EntitySystem, Float> consumption = new HashMap<>();
+    private boolean pause = false;
+    private float updateFactor = 1;
 
     public void addSystem(EntitySystem system, Float interval) {
         this.accumulator.put(system);
@@ -36,17 +43,18 @@ public class FrozenAshleyEngine extends PooledEngine implements EventSubscriber 
 
     @Override
     public void update(float deltaTime) {
+        float factoredTime = deltaTime * this.updateFactor;
         ImmutableArray<EntitySystem> systems = this.getSystems();
 
         for(EntitySystem s : systems)
-            this.accumulator.add(s, deltaTime);
+            this.accumulator.add(s, factoredTime);
 
         boolean update = true;
         while(update) {
             update = false;
 
             for (EntitySystem s : systems) {
-                float consumption = this.getConsumption(s, deltaTime);
+                float consumption = this.getConsumption(s, factoredTime);
                 if (this.accumulator.get(s) >= consumption) {
                     this.accumulator.subtract(s, consumption);
 
@@ -74,5 +82,16 @@ public class FrozenAshleyEngine extends PooledEngine implements EventSubscriber 
         system.addConsumer(e-> this.removeSystem(e.getSystem()), RemoveEntitySystemEvent.class);
 
         system.addConsumer(e-> this.update(e.getDelta()), ScreenRenderEvent.class);
+
+        system.addConsumer(e-> {
+            this.pause = !this.pause;
+            if(this.pause)
+                this.updateFactor = 0.1f;
+            else
+                this.updateFactor = 1;
+        }, ToggleSlowGameEvent.class);
+
+        system.addConsumer(e-> this.updateFactor *= 0.5f, DecreaseTimeFactorEvent.class);
+        system.addConsumer(e-> this.updateFactor *= 1.5f, IncreaseTimeFactorEvent.class);
     }
 }
