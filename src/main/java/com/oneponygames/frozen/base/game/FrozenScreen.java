@@ -76,4 +76,8 @@ public class FrozenScreen implements State<FrozenScreen>, EventService, EventSin
     public final <C extends GameEvent> void reportEvent(C event) {
         this.eventSystem.reportEvent(event);
     }
+
+    @Override
+    public void setActive(boolean b) {
+    }
 }

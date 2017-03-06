@@ -23,7 +23,7 @@ public class CharacterStateUpdateSystem extends HookedIteratingSystem {
 
     @Override
     protected void processEntity(Entity entity, float deltaTime) {
-        CharacterStateComponent state = BaseMappers.stateMap.get(entity);
+        CharacterStateComponent<?> state = BaseMappers.stateMap.get(entity);
 
         state.getStateMachine().peekCurrentState().update(deltaTime, this.accumulator);
     }

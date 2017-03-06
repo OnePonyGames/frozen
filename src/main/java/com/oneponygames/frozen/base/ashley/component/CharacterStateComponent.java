@@ -12,16 +12,16 @@ import java.util.Collection;
 /**
  * Created by Icewind on 16.02.2017.
  */
-public class CharacterStateComponent implements Component {
+public class CharacterStateComponent<S extends CharacterState> implements Component {
 
-    private final StateMachine<CharacterState> stateMachine = new StateMachine<>();
+    private final StateMachine<S> stateMachine = new StateMachine<>();
     private Timing activeStateTiming = new StateChangeResetTiming(this);
 
     public Timing getStateActiveTiming() {
         return activeStateTiming;
     }
 
-    public StateMachine<CharacterState> getStateMachine() {
+    public StateMachine<S> getStateMachine() {
         return stateMachine;
     }
 }

@@ -20,7 +20,10 @@ public class StateMachine<T extends State> {
 
     public void pushState(T nextState) {
         if(!this.hasState() || !this.peekCurrentState().equals(nextState)) {
+            if(this.hasState())
+                this.peekCurrentState().setActive(false);
             this.stateStack.addFirst(nextState);
+            nextState.setActive(true);
             this.notifyListenersNewState(nextState);
         }
     }
@@ -34,9 +37,13 @@ public class StateMachine<T extends State> {
     }
 
     private void popCurrentState(boolean notifyListeners) {
+        this.peekCurrentState().setActive(false);
         this.stateStack.removeFirst();
-        if(notifyListeners)
+
+        if(notifyListeners) {
+            this.peekCurrentState().setActive(true);
             this.notifyListenersNewState(this.peekCurrentState());
+        }
     }
 
     private void notifyListenersNewState(T newState) {

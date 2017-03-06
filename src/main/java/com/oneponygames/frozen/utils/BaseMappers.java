@@ -24,6 +24,7 @@ public abstract class BaseMappers {
     public static final ComponentMapper<CharacterStateComponent> stateMap = ComponentMapper.getFor(CharacterStateComponent.class);
     public static final ComponentMapper<AttackComponent> attackMap = ComponentMapper.getFor(AttackComponent.class);
     public static final ComponentMapper<AiStateComponent> aiMap = ComponentMapper.getFor(AiStateComponent.class);
+    public static final ComponentMapper<StatBlackboardComponent> statMap = ComponentMapper.getFor(StatBlackboardComponent.class);
 
     private BaseMappers() {}
 }

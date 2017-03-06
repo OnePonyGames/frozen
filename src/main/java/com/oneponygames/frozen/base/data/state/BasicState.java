@@ -25,4 +25,18 @@ public abstract class BasicState<T extends State> implements State<T> {
     public final void setStateMachine(StateMachine<T> tStateMachine) {
         this.stateMachine = tStateMachine;
     }
+
+    @Override
+    public void setActive(boolean b) {
+        if(b)
+            this.onActivation();
+        else
+            this.onDeactivation();
+    }
+
+    protected void onDeactivation() {
+    }
+
+    protected void onActivation() {
+    }
 }

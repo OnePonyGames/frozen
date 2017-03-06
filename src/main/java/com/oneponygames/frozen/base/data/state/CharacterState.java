@@ -8,15 +8,8 @@ import com.badlogic.ashley.core.Entity;
  */
 public abstract class CharacterState extends EntityState<CharacterState>  {
 
-    private final boolean attackState;
-
-    public CharacterState(String label, boolean attackState, Entity entity) {
+    public CharacterState(String label, Entity entity) {
         super(label, entity);
-        this.attackState = attackState;
-    }
-
-    public boolean isAttackState() {
-        return this.attackState;
     }
 
     public abstract void update(float deltaTime, float accumulator);

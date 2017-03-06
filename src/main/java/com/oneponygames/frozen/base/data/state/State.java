@@ -8,4 +8,6 @@ public interface State<T extends State> {
     public String getLabel();
 
     public void setStateMachine(StateMachine<T> tStateMachine);
+
+    public void setActive(boolean active);
 }
