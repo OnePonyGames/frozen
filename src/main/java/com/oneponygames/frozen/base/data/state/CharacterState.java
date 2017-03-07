@@ -8,17 +8,39 @@ import com.badlogic.ashley.core.Entity;
  */
 public abstract class CharacterState extends EntityState<CharacterState>  {
 
+    private float accumulator = 0;
+
     public CharacterState(String label, Entity entity) {
         super(label, entity);
     }
 
-    public abstract void update(float deltaTime, float accumulator);
+    /**
+     *
+     * @param deltaTime
+     * @param globalTime Time alive for the Entity
+     */
+    public final void update(float deltaTime, float globalTime) {
+        this.accumulator += deltaTime;
+        this.update(deltaTime, accumulator, globalTime);
+    }
+
+    /**
+     *
+     * @param deltaTime Time since last render.
+     * @param accumulator Time in this state.
+     * @param globalTime Time alive for the Entity.
+     */
+    protected abstract void update(float deltaTime, float accumulator, float globalTime);
+
+    @Override
+    protected void onActivation() {
+        this.accumulator = 0;
+    }
 
     @Override
     public String toString() {
         return "CharacterState{" +
-                "entity=" + this.getEntity() +
-                ", label='" + this.getLabel() + '\'' +
+                "label='" + this.getLabel() + '\'' +
                 '}';
     }
 

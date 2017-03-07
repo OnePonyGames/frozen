@@ -12,6 +12,7 @@ import com.oneponygames.frozen.base.data.hitbox.Hitbox;
 import com.oneponygames.frozen.base.data.hitbox.RectPositionComponentHitbox;
 import com.oneponygames.frozen.base.data.state.CharacterState;
 import com.oneponygames.frozen.base.gfx.AnimationDrawable;
+import com.oneponygames.frozen.platformer.events.combat.Damage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,15 +20,17 @@ import java.util.Map;
 /**
  * Created by Icewind on 17.02.2017.
  */
-public class Attack {
+public class Attack<D extends Damage> {
 
     private final RangeMap<Integer, Line> frameNrPositionMap = TreeRangeMap.create();
     private final RectPositionComponentHitbox hitbox;
     private final AnimationDrawable animation;
+    private final D damage;
 
-    public Attack(PositionComponent basePos, AnimationDrawable animation, float width, float height) {
+    public Attack(PositionComponent basePos, AnimationDrawable animation, D d, float width, float height) {
         this.hitbox = new RectPositionComponentHitbox(width, height, basePos);
         this.animation = animation;
+        this.damage = d;
     }
 
     /**
@@ -68,5 +71,9 @@ public class Attack {
 
     private int getKeyFrameIndex() {
         return this.animation.getKeyFrameIndex();
+    }
+
+    public D getDamage() {
+        return damage;
     }
 }

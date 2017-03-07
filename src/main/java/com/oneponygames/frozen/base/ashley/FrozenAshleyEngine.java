@@ -94,4 +94,6 @@ public class FrozenAshleyEngine extends PooledEngine implements EventSubscriber,
         system.addConsumer(e-> this.updateFactor *= 0.5f, DecreaseTimeFactorEvent.class);
         system.addConsumer(e-> this.updateFactor *= 1.5f, IncreaseTimeFactorEvent.class);
     }
+
+
 }

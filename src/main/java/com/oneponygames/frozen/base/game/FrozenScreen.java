@@ -80,4 +80,9 @@ public class FrozenScreen implements State<FrozenScreen>, EventService, EventSin
     @Override
     public void setActive(boolean b) {
     }
+
+    @Override
+    public boolean isActivatable() {
+        return true;
+    }
 }

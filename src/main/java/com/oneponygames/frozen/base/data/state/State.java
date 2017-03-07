@@ -10,4 +10,6 @@ public interface State<T extends State> {
     public void setStateMachine(StateMachine<T> tStateMachine);
 
     public void setActive(boolean active);
+
+    public boolean isActivatable();
 }

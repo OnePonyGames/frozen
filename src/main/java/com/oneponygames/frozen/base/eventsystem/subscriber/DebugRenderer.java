@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class DebugRenderer implements EventSubscriber, EventConsumer<ScreenRenderEvent> {
 
-    private static final float X_OFFSET = 12;
+    private static final float X_OFFSET = 150;
     private static final float Y_OFFSET = 10;
 
     private final List<DebugInfo> debug = new ArrayList<>();
@@ -45,7 +45,8 @@ public class DebugRenderer implements EventSubscriber, EventConsumer<ScreenRende
         for(int i=0;i<debug.size();i++) {
             String string = debug.get(i).getLabel() + ": " + debug.get(i).getValue();
             float y = Gdx.graphics.getHeight() - Y_OFFSET;
-            font.draw(this.batch, string, X_OFFSET, y - i * 15);
+            float x = Gdx.graphics.getWidth() - X_OFFSET;
+            font.draw(this.batch, string, x, y - i * 15);
         }
 
         this.batch.end();

@@ -23,8 +23,18 @@ public class StateMachine<T extends State> {
             if(this.hasState())
                 this.peekCurrentState().setActive(false);
             this.stateStack.addFirst(nextState);
-            nextState.setActive(true);
-            this.notifyListenersNewState(nextState);
+
+            this.checkNewValidState();
+        }
+    }
+
+    private void checkNewValidState() {
+        while(this.hasState() && !this.peekCurrentState().isActivatable())
+            this.stateStack.removeFirst();
+
+        if(this.hasState()) {
+            this.peekCurrentState().setActive(true);
+            this.notifyListenersNewState(this.peekCurrentState());
         }
     }
 
@@ -41,8 +51,7 @@ public class StateMachine<T extends State> {
         this.stateStack.removeFirst();
 
         if(notifyListeners) {
-            this.peekCurrentState().setActive(true);
-            this.notifyListenersNewState(this.peekCurrentState());
+            this.checkNewValidState();
         }
     }
 
