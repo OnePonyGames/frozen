@@ -5,5 +5,5 @@ package com.oneponygames.frozen.base.data.state;
  */
 public interface StateChangeListener<T extends State> {
 
-    public void notifyOfNewState(T newState);
+    public void notifyStateChange(T oldState, T newState);
 }

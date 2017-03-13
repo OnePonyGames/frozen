@@ -5,9 +5,9 @@ import com.badlogic.ashley.core.Entity;
 /**
  * Created by Icewind on 16.02.2017.
  */
-public class DoLightAttackEvent extends AttackEvent {
+public class LightAttackEvent extends AttackEvent {
 
-    public DoLightAttackEvent(Entity attacker) {
+    public LightAttackEvent(Entity attacker) {
         super(attacker);
     }
 }

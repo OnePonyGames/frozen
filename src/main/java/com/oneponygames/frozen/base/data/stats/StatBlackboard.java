@@ -2,6 +2,7 @@ package com.oneponygames.frozen.base.data.stats;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.TreeMultimap;
+import com.oneponygames.frozen.base.data.Blackboard;
 
 import java.util.Comparator;
 import java.util.HashMap;
@@ -12,8 +13,12 @@ import java.util.Map;
  */
 public class StatBlackboard implements Comparator<StatModifier> {
 
-    private final Map<String, Float> baseValueMap = new HashMap<>();
     private final Multimap<String, StatModifier> modifierMultimap = TreeMultimap.create(String::compareTo, this);
+    private Blackboard baseBlackboard;
+
+    public void setBaseBlackboard(Blackboard baseBlackboard) {
+        this.baseBlackboard = baseBlackboard;
+    }
 
     public float getFloatValue(String stat) {
         return this.getModifiedFloatValue(stat);
@@ -24,10 +29,10 @@ public class StatBlackboard implements Comparator<StatModifier> {
     }
 
     private Float getValue(String stat) {
-        if(!this.baseValueMap.containsKey(stat))
+        if(!this.baseBlackboard.contains(stat))
             throw new StatNotDefinedException(stat);
 
-        return this.baseValueMap.get(stat);
+        return this.baseBlackboard.get(stat, Float.class);
     }
 
     private Integer getModifiedIntValue(String stat) {
@@ -66,7 +71,7 @@ public class StatBlackboard implements Comparator<StatModifier> {
     }
 
     public void setBaseValue(String stat, float newBaseValue) {
-        this.baseValueMap.put(stat, newBaseValue);
+        this.baseBlackboard.put(stat, newBaseValue);
     }
 
     @Override

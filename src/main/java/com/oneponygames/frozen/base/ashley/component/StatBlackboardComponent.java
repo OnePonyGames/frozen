@@ -1,6 +1,7 @@
 package com.oneponygames.frozen.base.ashley.component;
 
 import com.badlogic.ashley.core.Component;
+import com.oneponygames.frozen.base.data.Blackboard;
 import com.oneponygames.frozen.base.data.stats.StatBlackboard;
 import com.oneponygames.frozen.base.data.stats.StatModifier;
 
@@ -13,6 +14,10 @@ public class StatBlackboardComponent implements Component {
 
     public StatBlackboardComponent() {
         this.blackboard = new StatBlackboard();
+    }
+
+    public void setBlackboard(Blackboard bb) {
+        this.blackboard.setBaseBlackboard(bb);
     }
 
     public void addModifier(StatModifier mod) {

@@ -12,4 +12,5 @@ public interface State<T extends State> {
     public void setActive(boolean active);
 
     public boolean isActivatable();
+
 }

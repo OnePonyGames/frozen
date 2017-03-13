@@ -14,7 +14,7 @@ public class StateChangeResetTiming extends BasicTiming implements StateChangeLi
     }
 
     @Override
-    public void notifyOfNewState(State newState) {
+    public void notifyStateChange(State oldState, State newState) {
         this.setTime(0);
     }
 }

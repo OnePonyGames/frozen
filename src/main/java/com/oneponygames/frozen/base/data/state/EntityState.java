@@ -14,7 +14,7 @@ public abstract class EntityState<T extends State> extends BasicState<T> {
         this.entity = entity;
     }
 
-    protected final Entity getEntity() {
+    public final Entity getEntity() {
         return entity;
     }
 }

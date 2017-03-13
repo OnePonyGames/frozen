@@ -89,7 +89,7 @@ public class CharacterStateDrawable implements Drawable, StateChangeListener<Cha
     }
 
     @Override
-    public void notifyOfNewState(CharacterState newState) {
+    public void notifyStateChange(CharacterState oldState, CharacterState newState) {
         this.currentDrawable = this.stateDrawableMap.get(newState);
     }
 }

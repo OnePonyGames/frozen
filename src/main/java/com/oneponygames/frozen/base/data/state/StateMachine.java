@@ -20,21 +20,24 @@ public class StateMachine<T extends State> {
 
     public void pushState(T nextState) {
         if(!this.hasState() || !this.peekCurrentState().equals(nextState)) {
-            if(this.hasState())
-                this.peekCurrentState().setActive(false);
+            T oldState = null;
+            if(this.hasState()) {
+                oldState = this.peekCurrentState();
+                oldState.setActive(false);
+            }
             this.stateStack.addFirst(nextState);
 
-            this.checkNewValidState();
+            this.checkNewValidState(oldState);
         }
     }
 
-    private void checkNewValidState() {
+    private void checkNewValidState(T oldState) {
         while(this.hasState() && !this.peekCurrentState().isActivatable())
             this.stateStack.removeFirst();
 
         if(this.hasState()) {
             this.peekCurrentState().setActive(true);
-            this.notifyListenersNewState(this.peekCurrentState());
+            this.notifyListenersNewState(oldState, this.peekCurrentState());
         }
     }
 
@@ -47,17 +50,18 @@ public class StateMachine<T extends State> {
     }
 
     private void popCurrentState(boolean notifyListeners) {
-        this.peekCurrentState().setActive(false);
+        T oldState = this.peekCurrentState();
+        oldState.setActive(false);
         this.stateStack.removeFirst();
 
         if(notifyListeners) {
-            this.checkNewValidState();
+            this.checkNewValidState(oldState);
         }
     }
 
-    private void notifyListenersNewState(T newState) {
+    private void notifyListenersNewState(T oldState, T newState) {
         for(StateChangeListener<T> lst : this.listeners)
-            lst.notifyOfNewState(newState);
+            lst.notifyStateChange(oldState, newState);
     }
 
     public void transition(T nextState) {
