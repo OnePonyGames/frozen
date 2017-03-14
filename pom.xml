@@ -24,6 +24,16 @@
             <artifactId>guava</artifactId>
             <version>21.0</version>
         </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-box2d</artifactId>
+            <version>1.9.6</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.box2dlights</groupId>
+            <artifactId>box2dlights</artifactId>
+            <version>1.4</version>
+        </dependency>
     </dependencies>
 
     <build>

@@ -4,6 +4,7 @@ package com.oneponygames.frozen.tiling;
 import com.oneponygames.frozen.base.data.Line;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -18,4 +19,6 @@ public interface TileMapInfo {
     public float getTileWidth();
 
     public float getTileHeight();
+
+    public Iterable<Tile> getTiles();
 }

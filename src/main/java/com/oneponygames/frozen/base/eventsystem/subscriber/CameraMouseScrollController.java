@@ -8,7 +8,7 @@ import com.oneponygames.frozen.base.eventsystem.events.lifecycle.ScreenRenderEve
 /**
  * Created by Icewind on 25.01.2017.
  */
-public class CameraInputSubscriber implements EventSubscriber {
+public class CameraMouseScrollController implements EventSubscriber {
 
     private static final float X_SCROLL_RANGE = 10;
     private static final float Y_SCROLL_RANGE = 10;
@@ -18,7 +18,7 @@ public class CameraInputSubscriber implements EventSubscriber {
     private float scrollX = 0;
     private float scrollY = 0;
 
-    public CameraInputSubscriber(OrthoCameraController camera) {
+    public CameraMouseScrollController(OrthoCameraController camera) {
         this.camera = camera;
     }
 

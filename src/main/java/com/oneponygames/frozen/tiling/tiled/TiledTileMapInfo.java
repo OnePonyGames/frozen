@@ -12,10 +12,7 @@ import com.oneponygames.frozen.tiling.Tile;
 import com.oneponygames.frozen.tiling.TileMapInfo;
 import com.oneponygames.frozen.tiling.tiled.event.TiledMapLoadedEvent;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by Icewind on 12.02.2017.
@@ -23,16 +20,28 @@ import java.util.List;
 public class TiledTileMapInfo implements TileMapInfo, EventSubscriber {
 
     public static final String PROP_SOLID = "solid";
+    public static final String PROP_LIGHT_RADIUS = "light_radius";
+    public static final String PROP_LIGHT_COLOR = "light_color";
+    public static final String PROP_LIGHT_TYPE = "light_type";
+
+    private static final String WIDTH = "width";
+    private static final String HEIGHT = "height";
     private static final String TILE_WIDTH = "tilewidth";
     private static final String TILE_HEIGHT = "tileheight";
 
     private TiledMap map;
-    private TiledMapTileLayer layer;
     private IntVector2 dimensions = new IntVector2(0,0);
+    private int mapWidth;
+    private int mapHeight;
 
     @Override
     public void subscribeTo(EventService system) {
         system.addConsumer(e -> this.setMap(e.getMap()), TiledMapLoadedEvent.class);
+    }
+
+    @Override
+    public Iterable<Tile> getTiles() {
+        return new TileIterator(this.map);
     }
 
     @Override
@@ -58,9 +67,13 @@ public class TiledTileMapInfo implements TileMapInfo, EventSubscriber {
     }
 
     public Tile getTile(int x, int y) {
-        TiledMapTileLayer.Cell cell = this.layer.getCell(x, y);
+        List<TiledMapTileLayer.Cell> cells = new ArrayList<>();
+        for(MapLayer layer : this.map.getLayers()) {
+            TiledMapTileLayer l = (TiledMapTileLayer)layer;
+            cells.add(l.getCell(x, y));
+        }
 
-        return new TiledTile(cell, new IntVector2(x, y), this.dimensions);
+        return new TiledTile(new IntVector2(x, y), this.dimensions, cells);
     }
 
     private IntVector2 worldToGridPos(Vector2 from) {
@@ -69,7 +82,8 @@ public class TiledTileMapInfo implements TileMapInfo, EventSubscriber {
 
     private void setMap(TiledMap map) {
         this.map = map;
-        this.layer = (TiledMapTileLayer)this.map.getLayers().get(0);
+        this.mapWidth = map.getProperties().get(WIDTH, Integer.class);
+        this.mapHeight = map.getProperties().get(HEIGHT, Integer.class);
         this.dimensions = new IntVector2(map.getProperties().get(TILE_WIDTH, Integer.class), map.getProperties().get(TILE_HEIGHT, Integer.class));
     }
 
@@ -81,5 +95,36 @@ public class TiledTileMapInfo implements TileMapInfo, EventSubscriber {
     @Override
     public float getTileHeight() {
         return this.dimensions.y;
+    }
+
+    private class TileIterator implements Iterable<Tile> {
+
+        private final TiledMap map;
+
+        public TileIterator(TiledMap map) {
+            this.map = map;
+        }
+
+        @Override
+        public Iterator<Tile> iterator() {
+            return new Iterator<Tile>() {
+                private int x = 0, y = 0;
+                @Override
+                public boolean hasNext() {
+                    return x+y < mapHeight + mapWidth - 2;
+                }
+
+                @Override
+                public Tile next() {
+                    Tile t = getTile(x, y);
+                    x++;
+                    if(x == mapWidth) {
+                        x = 0;
+                        y++;
+                    }
+                    return t;
+                }
+            };
+        }
     }
 }

@@ -11,5 +11,12 @@ public interface EventService {
 
     public <C extends GameEvent> void addConsumer(EventConsumer<C> subscriber, Class<? extends C>... eventClass);
 
+    /**
+     *
+     * @param subscriber
+     * @param priority Higher value updates later.
+     * @param eventClass
+     * @param <C>
+     */
     public <C extends GameEvent> void addConsumer(EventConsumer<C> subscriber, int priority, Class<? extends C>... eventClass);
 }

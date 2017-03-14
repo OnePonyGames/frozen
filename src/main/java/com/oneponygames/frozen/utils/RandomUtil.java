@@ -87,4 +87,8 @@ public final class RandomUtil {
         checkMinMax(min, max);
         return rand.nextFloat() * (max - min) + min;
     }
+
+    public static long nextLong() {
+        return rand.nextLong();
+    }
 }

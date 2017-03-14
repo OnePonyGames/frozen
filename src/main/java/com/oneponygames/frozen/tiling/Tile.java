@@ -14,4 +14,12 @@ public interface Tile {
     public boolean isSolid();
 
     public Vector2 getWorldCenter();
+
+    public boolean isLight();
+
+    public LightingInfo getLightingInfo();
+
+    float getWorldX();
+
+    float getWorldY();
 }
