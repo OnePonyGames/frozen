@@ -21,4 +21,8 @@ public class Blackboard {
     public void put(String id, Object value) {
         this.baseValueMap.put(id, value);
     }
+
+    public void clear() {
+        this.baseValueMap.clear();
+    }
 }

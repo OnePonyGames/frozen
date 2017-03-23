@@ -28,4 +28,8 @@ public class AnimationEventSource extends BasicEventSource implements AnimationL
             this.getEventSink().reportEvent(event);
         }
     }
+
+    public void clear() {
+        this.animationEventMap.clear();
+    }
 }

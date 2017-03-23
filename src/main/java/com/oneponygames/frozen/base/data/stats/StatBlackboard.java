@@ -83,4 +83,9 @@ public class StatBlackboard implements Comparator<StatModifier> {
 
         return -1;
     }
+
+    public void clear() {
+        this.modifierMultimap.clear();
+        this.baseBlackboard.clear();
+    }
 }

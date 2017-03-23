@@ -1,6 +1,7 @@
 package com.oneponygames.frozen.base.ashley.component;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.utils.Pool;
 import com.oneponygames.frozen.base.data.Blackboard;
 import com.oneponygames.frozen.base.data.stats.StatBlackboard;
 import com.oneponygames.frozen.base.data.stats.StatModifier;
@@ -8,7 +9,7 @@ import com.oneponygames.frozen.base.data.stats.StatModifier;
 /**
  * Created by Icewind on 06.03.2017.
  */
-public class StatBlackboardComponent implements Component {
+public class StatBlackboardComponent implements Component, Pool.Poolable {
 
     private final StatBlackboard blackboard;
 
@@ -42,5 +43,10 @@ public class StatBlackboardComponent implements Component {
 
     public void setBaseValue(String stat, float newBaseValue) {
         this.blackboard.setBaseValue(stat, newBaseValue);
+    }
+
+    @Override
+    public void reset() {
+        this.blackboard.clear();
     }
 }

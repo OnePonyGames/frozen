@@ -1,5 +1,6 @@
 package com.oneponygames.frozen.base.game;
 
+import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.oneponygames.frozen.base.ashley.EntityPool;
@@ -14,7 +15,7 @@ import com.oneponygames.frozen.base.eventsystem.sources.InputSourceAdapter;
 /**
  * Created by Icewind on 18.01.2017.
  */
-public class FrozenScreen implements State<FrozenScreen>, EventService, EventSink {
+public abstract class FrozenScreen implements State<FrozenScreen>, EventService, EventSink {
 
     private final String label;
     private final BasicEventSystem eventSystem;
@@ -37,6 +38,18 @@ public class FrozenScreen implements State<FrozenScreen>, EventService, EventSin
         this.engine.subscribeTo(this);
     }
 
+    protected void removeAllEntities() {
+        this.engine.removeAllEntities();
+    }
+
+    protected void stateTransition(String stateLabel) {
+        this.stateMachine.transitionByLabel(stateLabel);
+    }
+
+    protected EventService getEventService() {
+        return this.eventSystem;
+    }
+
     public final Screen getScreen() {
         return screen;
     }
@@ -53,13 +66,17 @@ public class FrozenScreen implements State<FrozenScreen>, EventService, EventSin
         return input;
     }
 
+    public Iterable<Entity> getEntities() {
+        return this.engine.getEntities();
+    }
+
     @Override
-    public <C extends GameEvent> void addConsumer(EventConsumer<C> subscriber, Class<? extends C>[] eventClass) {
+    public <C extends GameEvent> void addConsumer(EventConsumer<C> subscriber, Class<? extends C>... eventClass) {
         this.eventSystem.addConsumer(subscriber, eventClass);
     }
 
     @Override
-    public <C extends GameEvent> void addConsumer(EventConsumer<C> subscriber, int priority, Class<? extends C>[] eventClass) {
+    public <C extends GameEvent> void addConsumer(EventConsumer<C> subscriber, int priority, Class<? extends C>... eventClass) {
         this.eventSystem.addConsumer(subscriber, priority, eventClass);
     }
 
@@ -85,4 +102,12 @@ public class FrozenScreen implements State<FrozenScreen>, EventService, EventSin
     public boolean isActivatable() {
         return true;
     }
+
+    public final void init() {
+        this.screen.reset();
+
+        this.initInternal();
+    }
+
+    protected abstract void initInternal();
 }

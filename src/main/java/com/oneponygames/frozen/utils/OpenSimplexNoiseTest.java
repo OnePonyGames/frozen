@@ -10,13 +10,12 @@ import java.io.*;
 
 public class OpenSimplexNoiseTest {
 
-    private static final int WIDTH = 100;
+    private static final int WIDTH = 50;
     private static final int HEIGHT = 512;
-    private static final double FEATURE_SIZE = 128;
 
     public static void main(String[] args) throws IOException {
 
-        OctaveNoise noise = new OctaveNoise(4, 0.75, 100);
+        OctaveNoise noise = new OctaveNoise(4, 0.75, 200);
         BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 
         for (int x = 0; x < WIDTH; x++) {

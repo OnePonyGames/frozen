@@ -2,12 +2,13 @@ package com.oneponygames.frozen.base.ashley.component;
 
 import com.badlogic.ashley.core.Component;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Pool;
 import com.oneponygames.frozen.base.data.Position;
 
 /**
  * Created by Icewind on 23.01.2017.
  */
-public class PositionComponent implements Component {
+public class PositionComponent implements Component, Pool.Poolable {
 
     public static final int ORIENTATION_LEFT = 1;
     public static final int ORIENTATION_RIGHT = -1;
@@ -45,5 +46,10 @@ public class PositionComponent implements Component {
 
     public void setOrientation(int orientation) {
         this.orientation = orientation;
+    }
+
+    @Override
+    public void reset() {
+        this.setPosition(null);
     }
 }

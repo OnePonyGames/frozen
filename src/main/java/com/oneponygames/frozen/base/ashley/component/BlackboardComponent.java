@@ -1,12 +1,13 @@
 package com.oneponygames.frozen.base.ashley.component;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.utils.Pool;
 import com.oneponygames.frozen.base.data.Blackboard;
 
 /**
  * Created by Icewind on 13.03.2017.
  */
-public class BlackboardComponent implements Component {
+public class BlackboardComponent implements Component, Pool.Poolable {
 
     private final Blackboard blackboard;
 
@@ -24,5 +25,10 @@ public class BlackboardComponent implements Component {
 
     public void put(String id, Object value) {
         this.blackboard.put(id, value);
+    }
+
+    @Override
+    public void reset() {
+        this.blackboard.clear();
     }
 }

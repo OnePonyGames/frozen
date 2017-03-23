@@ -44,11 +44,10 @@ public class GridCollisionSystem extends IteratingSystem {
         Iterable<Tile> tilesT = this.tileInfo.getIntersectingTiles(top);
         Iterable<Tile> tilesB = this.tileInfo.getIntersectingTiles(bottom);
 
-        if(this.isInContactWithSolidTile(bottom, tilesB, 0, -1))
-            col.contactBottom = true;
-        /*if(this.isInContactWithSolidTile(left, tilesL))
-            col.contactLeft = true;
-        */
+        col.contactBottom = this.isInContactWithSolidTile(bottom, tilesB, 0, -1);
+        col.contactLeft = this.isInContactWithSolidTile(left, tilesL, -1, 0);
+        col.contactTop = this.isInContactWithSolidTile(left, tilesL, 0, 1);
+        col.contactRight = this.isInContactWithSolidTile(left, tilesL, 1, 0);
     }
 
     private boolean isInContactWithSolidTile(Line line, Iterable<Tile> tiles, int xDir, int yDir) {

@@ -8,4 +8,6 @@ public interface Timing {
     public void addTime(float delta);
 
     public float getTime();
+
+    public void setTime(float time);
 }

@@ -1,6 +1,7 @@
 package com.oneponygames.frozen.platformer.components;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.utils.Pool;
 import com.oneponygames.frozen.base.ashley.component.CharacterStateComponent;
 import com.oneponygames.frozen.base.data.state.CharacterState;
 import com.oneponygames.frozen.platformer.data.Attack;
@@ -11,7 +12,7 @@ import java.util.Map;
 /**
  * Created by Icewind on 17.02.2017.
  */
-public class AttackComponent implements Component {
+public class AttackComponent implements Component, Pool.Poolable {
 
     private final Map<CharacterState, Attack> stateAttackMap = new HashMap<>();
     private CharacterStateComponent state;
@@ -30,5 +31,11 @@ public class AttackComponent implements Component {
 
     public boolean hasActiveAttack() {
         return this.getActiveAttack() != null;
+    }
+
+    @Override
+    public void reset() {
+        this.setState(null);
+        this.stateAttackMap.clear();
     }
 }

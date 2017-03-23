@@ -91,4 +91,17 @@ public final class RandomUtil {
     public static long nextLong() {
         return rand.nextLong();
     }
+
+    public static List<Integer> createRandomSequence(int length, int times) {
+        List<Integer> ret = new ArrayList<>(length * times);
+        List<Integer> numbers = new ArrayList<>(length);
+        for(int i=0;i<length;i++)
+            numbers.add(i);
+
+        for(int i=0;i<times;i++) {
+            Collections.shuffle(numbers, rand);
+            ret.addAll(numbers);
+        }
+        return ret;
+    }
 }

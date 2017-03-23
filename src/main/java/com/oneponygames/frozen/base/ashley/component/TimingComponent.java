@@ -1,6 +1,7 @@
 package com.oneponygames.frozen.base.ashley.component;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.utils.Pool;
 import com.oneponygames.frozen.base.data.timing.Timing;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 /**
  * Created by Icewind on 20.01.2017.
  */
-public class TimingComponent implements Component {
+public class TimingComponent implements Component, Pool.Poolable {
 
     private final List<Timing> timings;
 
@@ -31,5 +32,10 @@ public class TimingComponent implements Component {
         for(Timing t : timings) {
             t.addTime(deltaTime);
         }
+    }
+
+    @Override
+    public void reset() {
+        this.timings.clear();
     }
 }

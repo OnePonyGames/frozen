@@ -1,6 +1,7 @@
 package com.oneponygames.frozen.base.ashley.component;
 
 import com.badlogic.ashley.core.Component;
+import com.badlogic.gdx.utils.Pool;
 import com.oneponygames.frozen.base.gfx.Drawable;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.List;
 /**
  * Created by Icewind on 23.01.2017.
  */
-public class DrawableComponent implements Component {
+public class DrawableComponent implements Component, Pool.Poolable {
 
     private final List<Drawable> drawables = new ArrayList<>();
 
@@ -29,5 +30,10 @@ public class DrawableComponent implements Component {
 
     public Collection<Drawable> getDrawables() {
         return this.drawables;
+    }
+
+    @Override
+    public void reset() {
+        this.drawables.clear();
     }
 }

@@ -17,7 +17,7 @@ public class BasicTiming implements Timing {
         return accumulator;
     }
 
-    protected void setTime(float time) {
+    public void setTime(float time) {
         this.accumulator = time;
     }
 }

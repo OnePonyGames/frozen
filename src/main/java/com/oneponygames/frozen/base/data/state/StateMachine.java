@@ -86,6 +86,10 @@ public class StateMachine<T extends State> {
         this.listeners.add(lst);
     }
 
+    public void removeStateChangeListener(StateChangeListener<T> lst) {
+        this.listeners.remove(lst);
+    }
+
     private boolean hasState() {
         return this.stateStack.size() > 0;
     }
@@ -122,5 +126,11 @@ public class StateMachine<T extends State> {
 
     public Collection<T> getStateStack() {
         return ImmutableList.copyOf(this.stateStack);
+    }
+
+    public void clear() {
+        this.stateStack.clear();
+        this.listeners.clear();
+        this.labelStateMap.clear();
     }
 }

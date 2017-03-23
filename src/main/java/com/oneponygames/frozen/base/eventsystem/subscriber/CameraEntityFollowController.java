@@ -29,9 +29,13 @@ public class CameraEntityFollowController implements EventSubscriber {
     @Override
     public void subscribeTo(EventService system) {
         system.addConsumer(e->{
-            PositionComponent pos = BaseMappers.positionMap.get(this.followEntity);
-            Vector2 diff = pos.getPositionVector().scl(pixelScaling).sub(this.camera.getCamera().position.x, this.camera.getCamera().position.y);
-            this.camera.move(diff.x, diff.y);
+            if(this.followEntity!=null) {
+                PositionComponent pos = BaseMappers.positionMap.get(this.followEntity);
+                if(pos!=null) {
+                    Vector2 diff = pos.getPositionVector().scl(pixelScaling).sub(this.camera.getCamera().position.x, this.camera.getCamera().position.y);
+                    this.camera.move(diff.x, diff.y);
+                }
+            }
         }, ScreenRenderEvent.class);
     }
 }

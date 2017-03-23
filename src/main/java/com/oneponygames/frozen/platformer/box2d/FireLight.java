@@ -19,7 +19,7 @@ import java.util.List;
 public class FireLight extends PointLight {
 
     private final EndlessIterator<Double> iterator;
-    private float distanceVariation = 0.5f;
+    private float distanceVariation = 0.75f;
     private final float baseDistance;
     private float accumulator = 0;
 
@@ -27,7 +27,7 @@ public class FireLight extends PointLight {
         super(rayHandler, rays, color, distance, x, y);
         this.baseDistance = distance;
         OctaveNoise noise = new OctaveNoise(4, 0.75, RandomUtil.nextLong());
-        List<Double> data = new ArrayList<>(Doubles.asList(noise.generateLine(100)));
+        List<Double> data = new ArrayList<>(Doubles.asList(noise.generateLine(50)));
         List<Double> inverse = new ArrayList<>(data);
         Collections.reverse(inverse);
         data.addAll(inverse);

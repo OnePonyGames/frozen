@@ -14,6 +14,10 @@ public class EventSourceScreenAdapter extends BasicEventSource implements Screen
 
     private float total;
 
+    public void reset() {
+        this.total = 0;
+    }
+
     @Override
     public void show() {}
 

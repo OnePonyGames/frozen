@@ -19,12 +19,18 @@ public class AnimationDrawable extends StaticOffsetDrawable {
     private final Animation<TextureRegion> animation;
     private final boolean looping;
     private final Set<AnimationListener> listeners = new LinkedHashSet<>();
+    private final String name;
 
-    public AnimationDrawable(Timing time, Animation<TextureRegion> animation, Vector2 offset, boolean looping) {
+    public AnimationDrawable(String name, Timing time, Animation<TextureRegion> animation, Vector2 offset, boolean looping) {
         super(0, offset, animation.getKeyFrame(0).getRegionWidth(), animation.getKeyFrame(0).getRegionHeight());
+        this.name = name;
         this.time = time;
         this.animation = animation;
         this.looping = looping;
+    }
+
+    public AnimationDrawable(Timing time, Animation<TextureRegion> animation, Vector2 offset, boolean looping) {
+        this("no-name", time, animation, offset, looping);
     }
 
     public AnimationDrawable(Timing time, Animation<TextureRegion> animation, Vector2 offset) {
